@@ -4,13 +4,13 @@ The House - simple adventure game
 Introduction
 ------------
 
-I`ve wanted to create a game since a long time. You know - one of those cool things you`d like try. :) When I started working on this project I had only basic knowledge about JS. Very basic. I didn`t even know how to define an array and JS objects and methods were some kind of mystery. Thanks to this game my skills have developed tremendously. I`m still far from calling myself "pro JS dev" but I`ve got siginficantly closer.
+I've wanted to create a game since a long time. You know - one of those cool things you`d like try. :) When I started working on this project I had only basic knowledge about JS. Very basic. I didn`t even know how to define an array and JS objects and methods were some kind of mystery. Thanks to this game my skills have developed tremendously. I`m still far from calling myself "pro JS dev" but I`ve got siginficantly closer.
 
 **You can play it [right here](http://animacjejs.pl/licencjat/).** Please mind that:
 
 * this game isn`t finished! Its about 85% - 90% complete, I'll, eventually, finish it,
-* it`s very, very short,
-* it`s my first game ever. :)
+* it's very, very short,
+* it's my first game ever. :)
 
 How does it work?
 -----------------
