@@ -1,1 +1,1 @@
-(function(a){a.fn.text_cloud=function(b,c){a("#text_cloud").remove();a("<div/>",{id:"text_cloud"}).appendTo(this).append("<div/>").append("<span/>");a("#text_cloud").find("span").text(b);setTimeout(function(){a("#text_cloud").fadeOut(200,function(){a("#text_cloud").remove()})},c)}})(jQuery);
+(function(a){a.fn.text_cloud=function(b,c){var d=a('<div class="text_cloud" />').appendTo(this).append("<div/>").append("<span/>");d.find("span").text(b);setTimeout(function(){d.fadeOut(200,function(){d.remove()})},c)}})(jQuery);

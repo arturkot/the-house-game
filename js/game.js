@@ -1048,13 +1048,17 @@ var game = {
 			/* ===ITEMS=== */
 
 			var creature = $('#table'),
-				eye = $('#eye');;
+				eye = $('#eye');
 
 			if ($.inArray("scene_computer", played) !== -1) {
 				window.eye = setInterval(function() {
 					eye
 					.sprite({no_of_frames:5, play_frames: 5});
 				}, (Math.random() * 10 + 1)*1000);
+
+				if ( $.inArray("scene_unite", played) !== -1 ||  $.inArray("scene_outside", played) !== -1 ) {
+					scene.no_click(true, 'rgba(0,0,0,.1)');
+				}
 
 				setTimeout(function() {
 					if ( $.inArray("scene_unite", played) === -1 ||  $.inArray("scene_outside", played) === -1 ) {
@@ -1063,19 +1067,78 @@ var game = {
 							creature.text_cloud('You have to be at least partially complete to travel...', 2000);
 						}, 3500);
 					} else {
-						dialogue_box.display({
-							character:false,
-							picture:false,
-							text: 'The game is over for now. Expect a continuation soon.',
-							options: ['Ok']
-						});
+						creature.text_cloud('You\'re ready now. You can go...', 5000);
+						
+						setTimeout(function() {
 
-						$('#options').on('click', '#option_0', function() {
-							dialogue_box.destroy();
-							creature.text_cloud('I\'m not able to help you yet. Come back soon.', 2000);
-						});
+							room.the_player.go_to.start({
+							
+								target: '3-4',
+								
+								action: function() {
+									$('#sprite').css('background-position', '-620px 0');
+									$('#player').text_cloud('But... Where?', 2000);
+									setTimeout(function() {
+										creature.text_cloud('You\'ll see!', 4000);
+
+										sound_woosh.play({volume: 120});
+										$('#light').animate({'opacity': 1}, 500, function() {
+											$('#player').css('opacity', 0);
+											$('#faux-player')
+												.css('opacity', 1)
+												.sprite({no_of_frames:5, play_frames: 5})
+												.animate({top: '-=50px'}, 500)
+												.animate({
+													top: -233,
+													right: 65,
+													opacity: 0
+												}, 500, function() {
+													var $el = $(this);
+													$el
+														.appendTo('body')
+														.css({
+															opacity: 0,
+															left: '50%',
+															top: '50%',
+															margin: '-155px 0 0 -155px',
+															backgroundPostion: '0 -310px'
+														})
+														.delay(2000)
+														.animate({opacity: 1}, 500);
+													var levitate = function() {
+														$el.transition({
+															y: '-=10px'
+														}, 500, function() {
+															$(this).transition({
+																y: '+=10px'
+															}, 500, function() {
+																levitate();
+															});
+														});
+													};
+													levitate();
+														setTimeout(function() {
+															$el
+																.spState(2)
+																.spStop(true)
+																.sprite({no_of_frames:5, play_frames: 5})
+																.spStart()
+																.animate({opacity: 0}, 2000, function() {
+																	scene.cabin();
+																});
+														}, 5000);
+													$('#kitchen_true').animate({opacity: 0}, 500);
+												});
+										});
+
+									}, 2500);
+								}  
+							
+							});
+
+						}, 5000);
 					}
-				}, 2000);
+				}, 1000);
 			} else {
 				eye.remove();
 			}
@@ -1896,6 +1959,10 @@ soundManager.onready(function() {
 			} else if (is_in === 'kitchen_true') {
 			
 				game.kitchen_true(5,2);
+
+			} else if (is_in === 'cabin') {
+			
+				scene.cabin();
 
 			}
 

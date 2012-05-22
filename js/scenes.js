@@ -643,6 +643,104 @@ var scene = {
 		}
 	},
 
+	cabin: function() {
+
+		$.jStorage.set('is_in', 'cabin');
+		soundManager.stopAll();
+
+		//view fades in
+		$('<div/>', {id: 'black'})
+			.appendTo('body')
+		.css('opacity', 1)
+		.animate({opacity:0}, 2000, function() {
+			$('body').find('#black').remove();
+		});
+
+		$('#the_game')
+			.empty()
+			.load('cabin.html', function() {
+
+				scene.no_click(true, 'rgba(0, 0, 0, .1)');
+
+				$('#cabin').pan({fps: 30, speed: 0.2, dir: 'right'});
+
+				var $player = $('#faux_player');
+
+				setTimeout(function() {
+					$player
+						.sprite({
+							fps: 4,
+							no_of_frames: 12,
+							play_frames: 4
+						})
+						.text_cloud('Huh?', 500);
+				}, 2000);
+
+				setTimeout(function() {
+					var $ticket = $('#ticket_inspector');
+					
+					 $ticket
+						.sprite({
+							fps: 8,
+							no_of_frames: 8
+						})
+						.animate({opacity: 1}, 200);
+
+					 $ticket
+						.animate({
+							left: 138,
+							top: 70
+						}, 1000, 'linear', function() {
+							$(this)
+								.spStop(true)
+								.spState(2)
+							setTimeout(function() {
+								$('#door')
+									.animate({
+										left: -67,
+										top: -40
+									}, 500, function() {
+										$ticket.text_cloud('Sir! Your stop is next.', 2000);
+										setTimeout(function() {
+											$ticket.text_cloud('You have to leave the train.', 2000);
+										}, 2000);
+										//$player.text_cloud('Huh..?', 1000);
+										setTimeout(function() {
+											$player.text_cloud('...', 1000);
+										}, 1000);
+										setTimeout(function() {
+											$player
+												.addClass('stand-up')
+												.sprite({
+													fps: 8,
+													no_of_frames: 12,
+													play_frames: 8
+												});
+											setTimeout(function() {
+												$ticket
+													.spState(1)
+													.spStart()
+													.animate({
+														left: -42,
+														top: -30
+													}, 1000);
+
+												setTimeout(function() {
+													$player.text_cloud('Yeah...', 99999);
+													$ticket.animate({opacity: 0}, 200);
+													$('#cabin').animate({opacity: 0}, 3000);
+												}, 800);
+											}, 2500);
+										}, 2000);
+									});
+							}, 500);
+						});
+				}, 4000);
+
+			});
+
+	},
+
 	no_click: function(create, color_value) {
 		
 		if (create === true) {
