@@ -1,0 +1,241 @@
+
+#train {
+position:absolute;
+width: 589px;
+height: 497px;
+cursor:move;
+
+	@-webkit-keyframes levitate {
+		0% { -webkit-transform: translateY(5px); }
+		50% { -webkit-transform: translateY(-5px); }
+		100% { -webkit-transform: translateY(5px); }
+	}
+
+	@-moz-keyframes levitate {
+		0% { -moz-transform: translateY(5px); }
+		50% { -moz-transform: translateY(-5px); }
+		100% { -moz-transform: translateY(5px); }
+	}
+
+	@-o-keyframes levitate {
+		0% { -o-transform: translateY(5px); }
+		50% { -o-transform: translateY(-5px); }
+		100% { -o-transform: translateY(5px); }
+	}
+
+	@-ms-keyframes levitate {
+		0% { -ms-transform: translateY(5px); }
+		50% { -ms-transform: translateY(-5px); }
+		100% { -ms-transform: translateY(5px); }
+	}
+
+	@keyframes levitate {
+		0% { transform: translateY(5px); }
+		50% { transform: translateY(-5px); }
+		100% { transform: translateY(5px); }
+	}
+
+	@-webkit-keyframes spin {
+		0% { -webkit-transform: rotate(0); }
+		100% { -webkit-transform: rotate(360deg); }
+	}
+
+	@-moz-keyframes spin {
+		0% { -moz-transform: rotate(0); }
+		100% { -moz-transform: rotate(360deg); }
+	}
+
+	@-o-keyframes spin {
+		0% { -o-transform: rotate(0); }
+		100% { -o-transform: rotate(360deg); }
+	}
+
+	@-ms-keyframes spin {
+		0% { -ms-transform: rotate(0); }
+		100% { -ms-transform: rotate(360deg); }
+	}
+
+	@keyframes spin {
+		0% { transform: rotate(0); }
+		100% { transform: rotate(360deg); }
+	}
+
+	#sprite {
+		background: url(../images/hidden_corridor_player.png) no-repeat 0 0
+	}
+
+	#shadow  {
+		width: 122px;
+		height: 102px;
+		background: url(../images/hidden_corridor_shadow.png) no-repeat;
+		left: -38px;
+		top: -28px;
+		opacity:.5;
+	}
+
+	#ticket_inspector {
+		width: 310px;
+		height: 310px;
+		position: absolute;
+		left: 60px;
+		top: -270px;
+
+		.text_cloud {
+			left: 140px;
+			top: -30px;
+		}
+
+	}
+
+	#ticket_sprite {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		left: 0;
+		top: 0;
+		background:url(../images/cabin_ticket_inspector.png) 0 -310px;
+	}
+
+	#ticket_shadow {
+		width: 90px;
+		height: 60px;
+		position: absolute;
+		left: 120px;
+		top: 248px;
+		background: url(../images/train_ticket_inspector_shadow.png);
+	}
+
+	#floor {
+		width: 589px;
+		height: 497px;
+		position: absolute;
+		right: 37px;
+		bottom: 39px;
+	}
+
+	#train_platform {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		left: 0;
+		top: 0;
+		background:url(../images/train_platform.png) no-repeat;
+	}
+
+	#train_container {
+		width: 1467px;
+		height: 1030px;
+		position: absolute;
+		left: 0;
+		top: 0;
+
+		&.levitate {
+			-webkit-animation: levitate 10s;
+			-moz-animation: levitate 10s;
+			-ms-animation: levitate 10s;
+			-o-animation: levitate 10s;
+			animation: levitate 10s;
+			-webkit-animation-iteration-count: infinite;
+			-moz-animation-iteration-count: infinite;
+			-ms-animation-iteration-count: infinite;
+			-o-animation-iteration-count: infinite;
+			animation-iteration-count: infinite;
+		}
+	}
+
+	#train_interior {
+		width: 243px;
+		height: 459px;
+		position: absolute;
+		left: 153px;
+		top: -399px;
+		background: url(../images/train_interior.png);
+	}
+
+	#train_door {
+		width: 109px;
+		height: 322px;
+		position: absolute;
+		left: 47px;
+		top: -322px;
+		background: url(../images/train_door.png);
+	}
+
+	#train_body {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		left: -90px;
+		top: -560px;
+		background: url(../images/train.png);
+	}
+
+	#train_engine {
+		width: 190px;
+		height: 195px;
+		border-radius: 10px;
+		position: absolute;
+		right: 265px;
+		top: 216px;
+		overflow: hidden;
+		.isometric_right();
+	}
+
+	#ring_1 {
+		width: 164px;
+		height: 164px;
+		border: 1px solid #ff0000;
+		border-radius: 100%;
+		position: absolute;
+		left: -27px;
+		top: -24px;
+	}
+
+	#ring_2 {
+		width: 151px;
+		height: 151px;
+		position: absolute;
+		left: -20px;
+		top: -17px;
+		background: url(../images/train_ring_2.png);
+
+		&.rotate {
+			-webkit-animation: spin 10s linear;
+			-moz-animation: spin 10s linear;
+			-ms-animation: spin 10s linear;
+			-o-animation: spin 10s linear;
+			animation: spin 10s linear;
+			-webkit-animation-iteration-count: infinite;
+			-moz-animation-iteration-count: infinite;
+			-ms-animation-iteration-count: infinite;
+			-o-animation-iteration-count: infinite;
+			animation-iteration-count: infinite;
+		}		
+	}
+
+	#ring_3 {
+		width: 81px;
+		height: 81px;
+		position: absolute;
+		left: 14px;
+		top: 18px;
+		background: url(../images/train_ring_3.png);
+	}
+
+	#train_glow {
+		width: 400px;
+		height: 405px;
+		position: absolute;
+		right: 90px;
+		top: 66px;
+		opacity: 0;
+		background: url(../images/train_glow.png);
+	}
+
+	#door_dark_corridor {
+		.invisible_door(313px, 318px);
+	}
+
+
+}
+

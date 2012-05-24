@@ -646,7 +646,6 @@ var scene = {
 	cabin: function() {
 
 		$.jStorage.set('is_in', 'cabin');
-		soundManager.stopAll();
 
 		//view fades in
 		$('<div/>', {id: 'black'})
@@ -659,8 +658,6 @@ var scene = {
 		$('#the_game')
 			.empty()
 			.load('cabin.html', function() {
-
-				scene.no_click(true, 'rgba(0, 0, 0, .1)');
 
 				$('#cabin').pan({fps: 30, speed: 0.2, dir: 'right'});
 
@@ -695,12 +692,13 @@ var scene = {
 								.spStop(true)
 								.spState(2)
 							setTimeout(function() {
+								sound_sliding_door.play();
 								$('#door')
 									.animate({
 										left: -67,
 										top: -40
 									}, 500, function() {
-										$ticket.text_cloud('Sir! Your stop is next.', 2000);
+										$ticket.text_cloud('Your stop is next.', 2000);
 										setTimeout(function() {
 											$ticket.text_cloud('You have to leave the train.', 2000);
 										}, 2000);
@@ -726,9 +724,11 @@ var scene = {
 													}, 1000);
 
 												setTimeout(function() {
-													$player.text_cloud('Yeah...', 99999);
+													$player.text_cloud('OK...', 99999);
 													$ticket.animate({opacity: 0}, 200);
-													$('#cabin').animate({opacity: 0}, 3000);
+													$('#cabin').animate({opacity: 0}, 3000, function() {
+														game.train(2,2);
+													});
 												}, 800);
 											}, 2500);
 										}, 2000);

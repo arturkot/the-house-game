@@ -1118,6 +1118,8 @@ var game = {
 													};
 													levitate();
 														setTimeout(function() {
+															soundManager.stopAll();
+															sound_train.play();
 															$el
 																.spState(2)
 																.spStop(true)
@@ -1604,6 +1606,7 @@ var game = {
 									setTimeout(function() {
 										clearInterval(window.computer_distortions);
 										computer_screen.empty().css('background', '#000');
+										lightbox.fadeOut();
 									}, 2500);
 								});
 							}
@@ -1826,6 +1829,58 @@ var game = {
 		});
 
 	//fridge - END
+	},
+
+	train: function(x,y) {
+	
+		//generates start room
+		room.generate({
+		
+		inject:'train',
+		
+		grid_width: 15,
+		grid_height: 5,
+		
+		collision_nodes: [
+		
+		//"dead" area
+		'0-0', '0-1', '0-4', '4-0', '4-1', '5-0', '5-2', '5-4', '6-0', '7-0', '8-0', '9-0', '10-0', '11-0', '12-0', '13-0', '14-0', '14-1', '14-4'
+
+		
+		],
+		
+		drag_room:true,
+		
+		player: 'player',
+		player_speed: 100,
+		player_position_x: x,
+		player_position_y: y,
+		
+		volume:50,
+		
+		execute: function() {
+			
+			scene.no_click(false);
+			var $ticket = $('#ticket_inspector');
+
+			setTimeout(function() {
+				$ticket.text_cloud('Good luck!', 1000);
+			}, 1000);
+
+			setTimeout(function() {
+				sound_sliding_door.play();
+				$('#train_door').animate({
+					left: 153,
+					top: -262
+				}, 500);
+			}, 2000);
+
+		//execute - END  
+		}
+		
+		});
+
+	//train - END
 	} 
 
 //game - END  
@@ -1963,6 +2018,10 @@ soundManager.onready(function() {
 			} else if (is_in === 'cabin') {
 			
 				scene.cabin();
+
+			} else if (is_in === 'train') {
+			
+				game.train(2,2);
 
 			}
 
