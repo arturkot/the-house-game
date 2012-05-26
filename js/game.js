@@ -1875,13 +1875,371 @@ var game = {
 				}, 500);
 			}, 2000);
 
+			$('#door_dark_corridor').on('click', function() {
+				room.the_player.go_to.start({
+					target: '12-4',
+					action: function() {
+						game.last_corridor(0,4);
+					}
+				});
+			});
+
 		//execute - END  
 		}
 		
 		});
 
 	//train - END
-	} 
+	},
+
+	last_corridor: function(x,y) {
+	
+		//generates start room
+		room.generate({
+		
+		inject:'last_corridor',
+		
+		grid_width: 5,
+		grid_height: 46,
+
+		collision_nodes: [],
+		
+		drag_room:true,
+		
+		player: 'player',
+		player_speed: 100,
+		player_position_x: x,
+		player_position_y: y,
+
+		volume:50,
+
+		execute: function() {
+			
+			var $door_train = $('#door_train'),
+				$darkness = $('#darkness'),
+				$lightbox = $('#lightbox').hide(),
+				$close = $lightbox.find('.close');
+
+			var $led1 = $('#use_led_1'),
+				$led2 = $('#use_led_2'),
+				$led3 = $('#use_led_3');
+
+			var $light1 = $('#fluorescent_2'),
+				$light2 = $('#fluorescent_3'),
+				$light3 = $('#fluorescent_4');
+
+			$door_train
+				.add($led1)
+				.add($led2)
+				.add($led3)
+				.tooltip('right');
+
+			$darkness.tooltip('left');
+
+			$door_train.on('click', function() {
+				room.the_player.go_to.start({
+					target: '0-4',
+					action: function() {
+						game.train(12,4);
+					}
+				});
+			});
+
+		// LEDs puzzle
+		var ledsPuzzle = function(thePattern, upperLeft, upperRight, lowerRight, callback) {
+
+			// clear boards
+			$lightbox.find('.light').removeClass('light');
+
+			var	$ledBody = $('#led_panel_body'),
+				$cell = $ledBody.find('td.cell'),
+				$lowerLeft = $('#led-r-l-l');
+
+			var $adjacents = function($el, $where) {
+				var $td = $el,
+					$tr = $el.closest('tr')
+					thisX = parseInt($td.attr('class').split(' ')[1].split('-')[1], 10),
+					thisY = parseInt($tr.attr('class').split('-')[1], 10);
+
+				return $el
+							.add($tr.children('td.col-' + (thisX-1)))
+							.add($tr.children('td.col-' + (thisX+1)))
+							.add($where.find('tr.row-' + (thisY-1)).children('td.col-' + thisX))
+							.add($where.find('tr.row-' + (thisY+1)).children('td.col-' + thisX))
+			};
+
+			var $related = function($el, $where) {
+				var $td = $el,
+					$tr = $el.closest('tr')
+					thisX = parseInt($td.attr('class').split(' ')[1].split('-')[1], 10),
+					thisY = parseInt($tr.attr('class').split('-')[1], 10)
+					$target = $where.find('tr.row-' + thisY).children('td.col-' + thisX);
+
+				return $target.add($adjacents($target, $where));
+			};
+
+			var cellSelector = function (array, $where) {
+				for (var i=0, j = array.length; i<j; i++) {
+					$where
+						.find('tr.row-' + array[i][0])
+						.children('td.col-' + array[i][1])
+						.addClass('light');
+				}
+			};
+
+			var generateArr = function($where) {
+				var $active = $where.find('.light'),
+					thisArr = [];
+
+				$active.each(function() {
+					var $td = $(this),
+						$tr = $(this).closest('tr')
+						thisX = parseInt($td.attr('class').split(' ')[1].split('-')[1], 10),
+						thisY = parseInt($tr.attr('class').split('-')[1], 10);
+					thisArr.push([thisY, thisX]);
+				});
+
+				return thisArr;
+
+			};
+
+			var compareArr = function(arr1, arr2) {
+				if (arr1.length != arr2.length) { return false; }
+				var a = arr1.sort(),
+					b = arr2.sort();
+
+				for (var i = 0; arr2[i]; i++) {
+					if (a[i][0] !== b[i][0] || a[i][1] !== b[i][1]) {
+							return false;
+					}
+				}
+				return true;
+			};
+
+			cellSelector(upperLeft, $('#led-r-u-l'));
+			cellSelector(upperRight, $('#led-r-u-r'));
+			cellSelector(lowerRight, $('#led-r-l-r'));
+
+			$cell
+				.off()
+				.on('click', function() {
+					sound_button.play();
+					$adjacents($(this), $ledBody)
+						.add($related($(this), $lowerLeft))
+						.toggleClass('light');
+
+					if (compareArr(generateArr($ledBody), thePattern)) {
+						callback();
+					}
+				})
+				.on('mouseenter', function() {
+					$adjacents($(this), $ledBody).addClass('highlight');
+				})
+				.on('mouseleave', function() {
+					$adjacents($(this), $ledBody).removeClass('highlight');
+				});
+
+		// ledsPuzzle - END
+		};
+
+		var activated1 = function() {
+			$led1
+				.off()
+				.attr('data-tooltip', 'It works now!')
+				.css('cursor', 'help')
+				.tooltip('right');
+			$('#led_1')
+				.add($light1)
+				.addClass('on');
+			$darkness.addClass('retract_1');
+		};
+
+		if ( $.inArray("darkness_retract1", played) !== -1 ) {
+			activated1();
+		} else {
+			$led1.on('click', function() {
+				room.the_player.go_to.start({
+					target: '0-9',
+					action: function() {
+						$lightbox.fadeIn();
+
+						var	thePattern = [
+								[1,1], [1,2], [1,3], [1,4], [1,5],
+								[2,1], [2,3], [2,5],
+								[3,1], [3,2], [3,3], [3,4], [3,5],
+								[4,2], [4,4]
+							],
+							upperLeft = [
+								[1,3], [1,4], [1,5],
+								[2,2], [2,3], [2,5],
+								[3,3], [3,4], [3,5],
+								[4,2], [4,3], [4,5],
+								[5,3], [5,4], [5,5]
+							],
+							upperRight = [
+								[2,2], [2,4],
+								[3,1], [3,2], [3,3], [3,4], [3,5],
+								[4,1], [4,3], [4,5],
+								[5,1], [5,2], [5,3], [5,4], [5,5]
+							],
+							lowerRight = [
+								[1,1], [1,2], [1,3],
+								[2,1], [2,3], [2,4],
+								[3,1], [3,2], [3,3],
+								[4,1], [4,3], [4,4],
+								[5,1], [5,2], [5,3]
+							]
+
+						ledsPuzzle(thePattern, upperLeft, upperRight, lowerRight, function() {
+							sound_beep.play();
+							setTimeout(function() {
+								var get_played = $.jStorage.get('played');
+								get_played.push('darkness_retract1');
+								$.jStorage.set('played', get_played);
+								$lightbox.fadeOut();
+								$darkness
+									.add($light1)
+									.addClass('crawl')
+								sound_darkness_retract.play();
+								activated1();
+							}, 1000);
+						});
+					}
+				});
+			// led1.click - END
+			});
+		// if retract1 played - END
+		}
+
+		var activated2 = function() {
+			$led2
+				.off()
+				.attr('data-tooltip', 'It works now!')
+				.css('cursor', 'help')
+				.tooltip('right');
+			$('#led_2')
+				.add($light2)
+				.addClass('on');
+			$darkness.addClass('retract_2');
+		};
+
+		if ( $.inArray("darkness_retract2", played) !== -1 ) {
+			activated2();
+		} else {
+			$led2.on('click', function() {
+				room.the_player.go_to.start({
+					target: '0-21',
+					action: function() {
+						$lightbox.fadeIn();
+
+						var	thePattern = [
+								[2,2], [2,4],
+								[4,2], [4,4]
+							],
+							upperLeft = [
+								[2,2], [2,4],
+								[4,2], [4,4]
+							],
+							upperRight = [
+								[2,2], [2,4],
+								[4,2], [4,4]
+							],
+							lowerRight = [
+								[2,2], [2,4],
+								[4,2], [4,4]
+							]
+
+						ledsPuzzle(thePattern, upperLeft, upperRight, lowerRight, function() {
+							sound_beep.play();
+							setTimeout(function() {
+								var get_played = $.jStorage.get('played');
+								get_played.push('darkness_retract2');
+								$.jStorage.set('played', get_played);
+								$lightbox.fadeOut();
+								$darkness
+									.add($light2)
+									.addClass('crawl')
+								sound_darkness_retract.play();
+								activated2();
+							}, 1000);
+						});
+					}
+				});
+			// led1.click - END
+			});
+		// if retract2 played - END
+		}
+
+		var activated3 = function() {
+			$led3
+				.off()
+				.attr('data-tooltip', 'It works now!')
+				.css('cursor', 'help')
+				.tooltip('right');
+			$('#led_3')
+				.add($light3)
+				.addClass('on');
+			$darkness.addClass('gone');
+		};
+
+		if ( $.inArray("darkness_retract3", played) !== -1 ) {
+			activated3();
+		} else {
+			$led3.on('click', function() {
+				room.the_player.go_to.start({
+					target: '0-33',
+					action: function() {
+						$lightbox.fadeIn();
+
+						var	thePattern = [
+								[1,2], [2,4],
+								[5,1], [4,5]
+							],
+							upperLeft = [
+								[1,1], [2,5],
+								[4,4], [5,2]
+							],
+							upperRight = [
+								[1,5], [2,1],
+								[4,2], [5,4]
+							],
+							lowerRight = [
+								[1,4], [2,2],
+								[4,1], [5,5]
+							]
+
+						ledsPuzzle(thePattern, upperLeft, upperRight, lowerRight, function() {
+							sound_beep.play();
+							setTimeout(function() {
+								var get_played = $.jStorage.get('played');
+								get_played.push('darkness_retract3');
+								$.jStorage.set('played', get_played);
+								$lightbox.fadeOut();
+								$darkness
+									.add($light3)
+									.addClass('crawl')
+								sound_darkness_retract.play();
+								activated3();
+							}, 1000);
+						});
+					}
+				});
+			// led1.click - END
+			});
+		// if retract3 played - END
+		}
+
+		$close.on('click', function() {
+			$lightbox.fadeOut();
+		});
+
+		//execute - END  
+		}
+		
+		});
+
+	//last_corridor - END
+	},
 
 //game - END  
 };
@@ -2022,6 +2380,10 @@ soundManager.onready(function() {
 			} else if (is_in === 'train') {
 			
 				game.train(2,2);
+
+			} else if (is_in === 'last_corridor') {
+			
+				game.last_corridor(0,6);
 
 			}
 

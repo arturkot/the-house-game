@@ -2937,6 +2937,664 @@
   cursor: pointer;
   background: url(../images/doors.png) no-repeat 0 0;
 }
+#last_corridor {
+  position: absolute;
+  width: 1853px;
+  height: 1352px;
+  cursor: move;
+  background: url(../images/last_corridor.jpg);
+}
+#last_corridor #sprite {
+  background: url(../images/hidden_corridor_player.png) no-repeat 0 0;
+}
+#last_corridor #shadow {
+  width: 122px;
+  height: 102px;
+  background: url(../images/hidden_corridor_shadow.png) no-repeat;
+  left: -38px;
+  top: -28px;
+  opacity: .5;
+}
+#last_corridor #floor {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  right: -47px;
+  bottom: -296px;
+}
+#last_corridor #door_train {
+  -moz-transform-origin: top left;
+  -webkit-transform-origin: top left;
+  -o-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -moz-transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+  -webkit-transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+  -o-transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+  -ms-transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+  transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+  width: 120px;
+  height: 241px;
+  position: absolute;
+  left: 1389px;
+  top: -122px;
+  z-index: 2000;
+  cursor: pointer;
+}
+#last_corridor .leds {
+  height: 138px;
+  position: absolute;
+  background: url(../images/last_corridor_leds.png);
+}
+#last_corridor .leds.on div {
+  border-color: #b10505;
+}
+#last_corridor .wires {
+  border-left: 1px solid #000;
+  border-radius: 5px 0 0 0;
+  position: absolute;
+}
+#last_corridor #led_1 {
+  width: 79px;
+  right: 548px;
+  top: -12px;
+  height: 138px;
+  position: absolute;
+  background: url(../images/last_corridor_leds.png);
+  background-position: -163px 0;
+}
+#last_corridor #led_1.on div {
+  border-color: #b10505;
+}
+#last_corridor #led_1.on {
+  background-position: -163px -138px;
+}
+#last_corridor #led_1 .wire_1 {
+  height: 97px;
+  width: 10px;
+  left: 16px;
+  bottom: 111px;
+  border-left: 1px solid #000;
+  border-radius: 5px 0 0 0;
+  position: absolute;
+  -moz-transform-origin: top left;
+  -webkit-transform-origin: top left;
+  -o-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -moz-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -webkit-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -o-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -ms-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  transform: rotate(30deg) skew(30deg) scaley(0.866);
+}
+#last_corridor #led_1 .wire_2 {
+  height: 94px;
+  width: 10px;
+  left: 22px;
+  bottom: 117px;
+  border-left: 1px solid #000;
+  border-radius: 5px 0 0 0;
+  position: absolute;
+  -moz-transform-origin: top left;
+  -webkit-transform-origin: top left;
+  -o-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -moz-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -webkit-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -o-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -ms-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  transform: rotate(30deg) skew(30deg) scaley(0.866);
+}
+#last_corridor #led_1 .wire_3 {
+  height: 97px;
+  width: 10px;
+  left: 27px;
+  bottom: 116px;
+  border-left: 1px solid #000;
+  border-radius: 5px 0 0 0;
+  position: absolute;
+  -moz-transform-origin: top left;
+  -webkit-transform-origin: top left;
+  -o-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -moz-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -webkit-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -o-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -ms-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  transform: rotate(30deg) skew(30deg) scaley(0.866);
+}
+#last_corridor #led_1 .wire_4 {
+  height: 98px;
+  width: 10px;
+  left: 32px;
+  bottom: 118px;
+  border-left: 1px solid #000;
+  border-radius: 5px 0 0 0;
+  position: absolute;
+  -moz-transform-origin: top left;
+  -webkit-transform-origin: top left;
+  -o-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -moz-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -webkit-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -o-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -ms-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  transform: rotate(30deg) skew(30deg) scaley(0.866);
+}
+#last_corridor #led_2 {
+  width: 82px;
+  right: 963px;
+  top: 227px;
+  height: 138px;
+  position: absolute;
+  background: url(../images/last_corridor_leds.png);
+  background-position: -81px 0;
+}
+#last_corridor #led_2.on div {
+  border-color: #b10505;
+}
+#last_corridor #led_2.on {
+  background-position: -81px -138px;
+}
+#last_corridor #led_2 .wire_1 {
+  height: 97px;
+  width: 10px;
+  left: 55px;
+  bottom: 130px;
+  border-left: 1px solid #000;
+  border-radius: 5px 0 0 0;
+  position: absolute;
+  -moz-transform-origin: top left;
+  -webkit-transform-origin: top left;
+  -o-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -moz-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -webkit-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -o-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -ms-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  transform: rotate(30deg) skew(30deg) scaley(0.866);
+}
+#last_corridor #led_2 .wire_2 {
+  height: 97px;
+  width: 10px;
+  left: 65px;
+  bottom: 136px;
+  border-left: 1px solid #000;
+  border-radius: 5px 0 0 0;
+  position: absolute;
+  -moz-transform-origin: top left;
+  -webkit-transform-origin: top left;
+  -o-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -moz-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -webkit-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -o-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -ms-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  transform: rotate(30deg) skew(30deg) scaley(0.866);
+}
+#last_corridor #led_2 .wire_3 {
+  height: 149px;
+  width: 10px;
+  left: -2px;
+  bottom: 45px;
+  border-left: 1px solid #000;
+  border-radius: 5px 0 0 0;
+  position: absolute;
+  border-radius: 5px 0  0 5px;
+  -moz-transform-origin: top left;
+  -webkit-transform-origin: top left;
+  -o-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -moz-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -webkit-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -o-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -ms-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  transform: rotate(30deg) skew(30deg) scaley(0.866);
+}
+#last_corridor #led_2 .wire_4 {
+  height: 152px;
+  width: 10px;
+  left: -2px;
+  bottom: 38px;
+  border-left: 1px solid #000;
+  border-radius: 5px 0 0 0;
+  position: absolute;
+  border-radius: 0 0 0 5px;
+  -moz-transform-origin: top left;
+  -webkit-transform-origin: top left;
+  -o-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -moz-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -webkit-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -o-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -ms-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  transform: rotate(30deg) skew(30deg) scaley(0.866);
+}
+#last_corridor #led_3 {
+  width: 82px;
+  right: 1378px;
+  top: 467px;
+  height: 138px;
+  position: absolute;
+  background: url(../images/last_corridor_leds.png);
+  background-position: 0 0;
+}
+#last_corridor #led_3.on div {
+  border-color: #b10505;
+}
+#last_corridor #led_3.on {
+  background-position: 0 -138px;
+}
+#last_corridor #led_3 .wire_1 {
+  height: 40px;
+  width: 10px;
+  left: -2px;
+  bottom: 78px;
+  border-left: 1px solid #000;
+  border-radius: 5px 0 0 0;
+  position: absolute;
+  border-radius: 0 0 0 5px;
+  -moz-transform-origin: top left;
+  -webkit-transform-origin: top left;
+  -o-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -moz-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -webkit-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -o-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -ms-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  transform: rotate(30deg) skew(30deg) scaley(0.866);
+}
+#last_corridor #led_3 .wire_2 {
+  height: 40px;
+  width: 10px;
+  left: -2px;
+  bottom: 68px;
+  border-left: 1px solid #000;
+  border-radius: 5px 0 0 0;
+  position: absolute;
+  border-radius: 0 0 0 5px;
+  -moz-transform-origin: top left;
+  -webkit-transform-origin: top left;
+  -o-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -moz-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -webkit-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -o-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -ms-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  transform: rotate(30deg) skew(30deg) scaley(0.866);
+}
+#last_corridor #led_3 .wire_3 {
+  height: 40px;
+  width: 10px;
+  left: -2px;
+  bottom: 37px;
+  border-left: 1px solid #000;
+  border-radius: 5px 0 0 0;
+  position: absolute;
+  border-radius: 0 0 0 5px;
+  -moz-transform-origin: top left;
+  -webkit-transform-origin: top left;
+  -o-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -moz-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -webkit-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -o-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -ms-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  transform: rotate(30deg) skew(30deg) scaley(0.866);
+}
+#last_corridor #led_3 .wire_4 {
+  height: 164px;
+  width: 10px;
+  left: -2px;
+  bottom: 30px;
+  border-left: 1px solid #000;
+  border-radius: 5px 0 0 0;
+  position: absolute;
+  border-radius: 5px 0 0 5px;
+  -moz-transform-origin: top left;
+  -webkit-transform-origin: top left;
+  -o-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -moz-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -webkit-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -o-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  -ms-transform: rotate(30deg) skew(30deg) scaley(0.866);
+  transform: rotate(30deg) skew(30deg) scaley(0.866);
+}
+#last_corridor .use_leds {
+  width: 89px;
+  height: 87px;
+  border-radius: 10px;
+  position: absolute;
+  z-index: 1001;
+  cursor: pointer;
+  -moz-transform-origin: top left;
+  -webkit-transform-origin: top left;
+  -o-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -moz-transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+  -webkit-transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+  -o-transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+  -ms-transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+  transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+}
+#last_corridor #use_led_1 {
+  right: 488px;
+  top: 323px;
+  width: 89px;
+  height: 87px;
+  border-radius: 10px;
+  position: absolute;
+  z-index: 1001;
+  cursor: pointer;
+  -moz-transform-origin: top left;
+  -webkit-transform-origin: top left;
+  -o-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -moz-transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+  -webkit-transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+  -o-transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+  -ms-transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+  transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+}
+#last_corridor #use_led_2 {
+  right: 903px;
+  top: 562px;
+  width: 89px;
+  height: 87px;
+  border-radius: 10px;
+  position: absolute;
+  z-index: 1001;
+  cursor: pointer;
+  -moz-transform-origin: top left;
+  -webkit-transform-origin: top left;
+  -o-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -moz-transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+  -webkit-transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+  -o-transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+  -ms-transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+  transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+}
+#last_corridor #use_led_3 {
+  right: 1320px;
+  top: 803px;
+  width: 89px;
+  height: 87px;
+  border-radius: 10px;
+  position: absolute;
+  z-index: 1001;
+  cursor: pointer;
+  -moz-transform-origin: top left;
+  -webkit-transform-origin: top left;
+  -o-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -moz-transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+  -webkit-transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+  -o-transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+  -ms-transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+  transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+}
+#last_corridor .fluoresents {
+  width: 229px;
+  height: 158px;
+  position: absolute;
+  z-index: 1003;
+  opacity: 0;
+  background: url(../images/last_corridor_fluorescent.png);
+}
+#last_corridor .fluoresents.crawl {
+  -moz-transition: opacity 10s linear;
+  -webkit-transition: opacity 10s linear;
+  -o-transition: opacity 10s linear;
+  -ms-transition: opacity 10s linear;
+  transition: opacity 10s linear;
+}
+#last_corridor .fluoresents.on {
+  opacity: 1;
+}
+#last_corridor #fluorescent_1 {
+  right: 240px;
+  top: 120px;
+  width: 229px;
+  height: 158px;
+  position: absolute;
+  z-index: 1003;
+  opacity: 0;
+  background: url(../images/last_corridor_fluorescent.png);
+}
+#last_corridor #fluorescent_1.crawl {
+  -moz-transition: opacity 10s linear;
+  -webkit-transition: opacity 10s linear;
+  -o-transition: opacity 10s linear;
+  -ms-transition: opacity 10s linear;
+  transition: opacity 10s linear;
+}
+#last_corridor #fluorescent_1.on {
+  opacity: 1;
+}
+#last_corridor #fluorescent_2 {
+  right: 667px;
+  top: 366px;
+  width: 229px;
+  height: 158px;
+  position: absolute;
+  z-index: 1003;
+  opacity: 0;
+  background: url(../images/last_corridor_fluorescent.png);
+}
+#last_corridor #fluorescent_2.crawl {
+  -moz-transition: opacity 10s linear;
+  -webkit-transition: opacity 10s linear;
+  -o-transition: opacity 10s linear;
+  -ms-transition: opacity 10s linear;
+  transition: opacity 10s linear;
+}
+#last_corridor #fluorescent_2.on {
+  opacity: 1;
+}
+#last_corridor #fluorescent_3 {
+  right: 1082px;
+  top: 606px;
+  width: 229px;
+  height: 158px;
+  position: absolute;
+  z-index: 1003;
+  opacity: 0;
+  background: url(../images/last_corridor_fluorescent.png);
+}
+#last_corridor #fluorescent_3.crawl {
+  -moz-transition: opacity 10s linear;
+  -webkit-transition: opacity 10s linear;
+  -o-transition: opacity 10s linear;
+  -ms-transition: opacity 10s linear;
+  transition: opacity 10s linear;
+}
+#last_corridor #fluorescent_3.on {
+  opacity: 1;
+}
+#last_corridor #fluorescent_4 {
+  right: 1498px;
+  top: 846px;
+  width: 229px;
+  height: 158px;
+  position: absolute;
+  z-index: 1003;
+  opacity: 0;
+  background: url(../images/last_corridor_fluorescent.png);
+}
+#last_corridor #fluorescent_4.crawl {
+  -moz-transition: opacity 10s linear;
+  -webkit-transition: opacity 10s linear;
+  -o-transition: opacity 10s linear;
+  -ms-transition: opacity 10s linear;
+  transition: opacity 10s linear;
+}
+#last_corridor #fluorescent_4.on {
+  opacity: 1;
+}
+#last_corridor #darkness {
+  left: -310px;
+  top: 178px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  cursor: help;
+}
+#last_corridor #darkness.crawl {
+  -moz-transition: all 10s linear;
+  -webkit-transition: all 10s linear;
+  -o-transition: all 10s linear;
+  -ms-transition: all 10s linear;
+  transition: all 10s linear;
+}
+#last_corridor #darkness.retract_1 {
+  left: -730px;
+  top: 420px;
+}
+#last_corridor #darkness.retract_2 {
+  left: -1150px;
+  top: 662px;
+}
+#last_corridor #darkness.gone {
+  opacity: 0;
+}
+#last_corridor #darkness .wall {
+  width: 1680px;
+  height: 320px;
+  position: absolute;
+  z-index: 1002;
+  bottom: 137px;
+  left: 50px;
+  -moz-transform-origin: top left;
+  -webkit-transform-origin: top left;
+  -o-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -moz-transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+  -webkit-transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+  -o-transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+  -ms-transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+  transform: rotate(-30deg) skew(-30deg) scaley(0.866);
+  background: -moz-linear-gradient(left, #000000 95%, rgba(0, 0, 0, 0) 100%);
+  background: -webkit-gradient(linear, left top, right top, color-stop(95%, #000000), color-stop(100%, rgba(0, 0, 0, 0)));
+  background: -webkit-linear-gradient(left, #000000 95%, rgba(0, 0, 0, 0) 100%);
+  background: -o-linear-gradient(left, #000000 95%, rgba(0, 0, 0, 0) 100%);
+  background: -ms-linear-gradient(left, #000000 95%, rgba(0, 0, 0, 0) 100%);
+  background: linear-gradient(left, #000000 95%, rgba(0, 0, 0, 0) 100%);
+}
+#last_corridor #darkness .floor {
+  width: 1680px;
+  height: 240px;
+  position: absolute;
+  z-index: 1002;
+  bottom: -103px;
+  left: 50px;
+  background: red;
+  -moz-transform-origin: top left;
+  -webkit-transform-origin: top left;
+  -o-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -moz-transform: rotate(-30deg) skew(30deg) scaley(0.866);
+  -webkit-transform: rotate(-30deg) skew(30deg) scaley(0.866);
+  -o-transform: rotate(-30deg) skew(30deg) scaley(0.866);
+  -ms-transform: rotate(-30deg) skew(30deg) scaley(0.866);
+  transform: rotate(-30deg) skew(30deg) scaley(0.866);
+  background: -moz-linear-gradient(left, #000000 95%, rgba(0, 0, 0, 0) 100%);
+  background: -webkit-gradient(linear, left top, right top, color-stop(95%, #000000), color-stop(100%, rgba(0, 0, 0, 0)));
+  background: -webkit-linear-gradient(left, #000000 95%, rgba(0, 0, 0, 0) 100%);
+  background: -o-linear-gradient(left, #000000 95%, rgba(0, 0, 0, 0) 100%);
+  background: -ms-linear-gradient(left, #000000 95%, rgba(0, 0, 0, 0) 100%);
+  background: linear-gradient(left, #000000 95%, rgba(0, 0, 0, 0) 100%);
+}
+#led_panel {
+  width: 512px;
+  height: 512px;
+  margin: -256px 0 0 -256px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: url(../images/last_corridor_led_panel.png);
+}
+#led_panel #led_panel_body {
+  width: 452px;
+  height: 452px;
+  border-collapse: collapse;
+  position: absolute;
+  left: 30px;
+  top: 30px;
+}
+#led_panel #led_panel_body .cell {
+  width: 90.4px;
+  height: 90.4px;
+  border-radius: 100%;
+  background: url(../images/last_corridor_led_off.png) no-repeat 50% 50%;
+  cursor: pointer;
+  -moz-transition: background-color 0.2s linear;
+  -webkit-transition: background-color 0.2s linear;
+  -o-transition: background-color 0.2s linear;
+  -ms-transition: background-color 0.2s linear;
+  transition: background-color 0.2s linear;
+}
+#led_panel #led_panel_body .cell.light {
+  background-image: url(../images/last_corridor_led_on.png);
+}
+#led_panel #led_panel_body .cell.highlight {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+#led_reference {
+  width: 206px;
+  height: 206px;
+  padding: 10px;
+  border-radius: 10px;
+  position: absolute;
+  right: -236px;
+  top: 0;
+  background: -moz-linear-gradient(top, #d8d8d8 0%, #a5a5a5 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #d8d8d8), color-stop(100%, #a5a5a5));
+  background: -webkit-linear-gradient(top, #d8d8d8 0%, #a5a5a5 100%);
+  background: -o-linear-gradient(top, #d8d8d8 0%, #a5a5a5 100%);
+  background: -ms-linear-gradient(top, #d8d8d8 0%, #a5a5a5 100%);
+  background: linear-gradient(top, #d8d8d8 0%, #a5a5a5 100%);
+}
+#led_reference table {
+  width: 103px;
+  height: 103px;
+  border-collapse: collapse;
+  float: left;
+}
+#led_reference table .cell {
+  border: 1px solid #1f1f1f;
+  background: #808080;
+}
+#led_reference table .cell.light {
+  background: -moz-linear-gradient(top, #f85032 0%, #f16f5c 50%, #f6290c 51%, #f02f17 71%, #e73827 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f85032), color-stop(50%, #f16f5c), color-stop(51%, #f6290c), color-stop(71%, #f02f17), color-stop(100%, #e73827));
+  background: -webkit-linear-gradient(top, #f85032 0%, #f16f5c 50%, #f6290c 51%, #f02f17 71%, #e73827 100%);
+  background: -o-linear-gradient(top, #f85032 0%, #f16f5c 50%, #f6290c 51%, #f02f17 71%, #e73827 100%);
+  background: -ms-linear-gradient(top, #f85032 0%, #f16f5c 50%, #f6290c 51%, #f02f17 71%, #e73827 100%);
+  background: linear-gradient(top, #f85032 0%, #f16f5c 50%, #f6290c 51%, #f02f17 71%, #e73827 100%);
+}
+#led_reference #led-r-u-l {
+  border-radius: 10px 0 0 0;
+}
 /* VIEWS */
 .view {
   min-width: 1024px;
@@ -4027,4 +4685,56 @@ body,
 }
 #preload_5 {
   background: url(../images/room_note_big.png);
+}
+#resume_screen {
+  width: 200px;
+  margin: -124px 0 0 -100px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+}
+#resume_screen p {
+  color: #fff;
+  font: 24px/64px 'Neuton', georgia, serif;
+  margin: 20px 0;
+  border-radius: 64px;
+  cursor: pointer;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.2);
+  -moz-transition: all 0.5s linear;
+  -webkit-transition: all 0.5s linear;
+  -o-transition: all 0.5s linear;
+  -ms-transition: all 0.5s linear;
+  transition: all 0.5s linear;
+}
+#resume_screen p:hover {
+  color: #168AD3;
+  background: #ffffff;
+}
+#resume_screen .icon {
+  margin-right: 10px;
+}
+#resume_screen .text,
+#resume_screen .icon {
+  float: left;
+  vertical-align: middle;
+}
+.resume_icons {
+  width: 64px;
+  height: 64px;
+  display: inline-block;
+  background: url(../images/resume_screen.png);
+}
+#resume_screen_resume {
+  width: 64px;
+  height: 64px;
+  display: inline-block;
+  background: url(../images/resume_screen.png);
+}
+#resume_screen_restart {
+  width: 64px;
+  height: 64px;
+  display: inline-block;
+  background: url(../images/resume_screen.png);
+  background-position: 0 -64px;
 }

@@ -21,6 +21,7 @@
 @import "outside_view.less";
 @import "cabin.less";
 @import "train.less";
+@import "last_corridor.less";
 
 @import "view.less";
 
@@ -540,3 +541,55 @@ html, body,
 #preload_5 {
 	background:url(../images/room_note_big.png);
 }
+
+#resume_screen {
+	width: 200px;
+	margin: -124px 0 0 -100px;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+
+	p {
+		color: #fff;
+		font: 24px/64px 'Neuton', georgia, serif;
+		margin: 20px 0;
+		border-radius: 64px;
+		cursor: pointer;
+		overflow: hidden;
+		background: rgba(255, 255, 255, .2);
+		.transition(all, .5s);
+
+		&:hover {
+			color: #168AD3;
+			background: rgba(255, 255, 255, 1);
+		}
+
+	}
+
+	.icon {
+		margin-right: 10px;
+	}
+
+	.text,
+	.icon {
+		float: left;
+		vertical-align: middle;
+	}
+}
+
+.resume_icons {
+	width: 64px;
+	height: 64px;
+	display: inline-block;
+	background: url(../images/resume_screen.png);
+}
+
+#resume_screen_resume {
+	.resume_icons;
+}
+
+#resume_screen_restart {
+	.resume_icons;
+	background-position: 0 -64px;
+}
+

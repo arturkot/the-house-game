@@ -17,6 +17,7 @@
 			sound_clang = soundManager.createSound({id: 'sound_clang', url:'/the-house-game/sound/clang' + sound_ext, autoLoad: true});
 			sound_clong = soundManager.createSound({id: 'sound_clong', url:'/the-house-game/sound/clong' + sound_ext, autoLoad: true});
 			sound_creak = soundManager.createSound({id: 'sound_creak', url:'/the-house-game/sound/creak' + sound_ext, autoLoad: true}); 
+			sound_darkness_retract = soundManager.createSound({id: 'darkness_retract', url:'/the-house-game/sound/darkness_retract' + sound_ext, autoLoad: true}); 
 			sound_door = soundManager.createSound({id: 'sound_door', url:'/the-house-game/sound/door' + sound_ext, autoLoad: true}); 
 			sound_door_locked = soundManager.createSound({id: 'sound_door_locked', url:'/the-house-game/sound/door_locked' + sound_ext, autoLoad: true}); 
 			sound_explosion = soundManager.createSound({id: 'sound_explosion', url:'/the-house-game/sound/explosion' + sound_ext, autoLoad: true}); 
@@ -36,7 +37,8 @@
 			//rooms backgrounds
 			sound.room = soundManager.createSound({id: 'room', url:'/the-house-game/sound/room' + sound_ext, autoLoad: true});
 			sound.corridor = soundManager.createSound({id: 'corridor', url:'/the-house-game/sound/corridor' + sound_ext, autoLoad: true}); 
-			sound.hidden_corridor = soundManager.createSound({id: 'hidden_corridor', url:'/the-house-game/sound/corridor' + sound_ext, autoLoad: true}); 
+			sound.hidden_corridor = soundManager.createSound({id: 'last_corridor', url:'/the-house-game/sound/corridor' + sound_ext, autoLoad: true}); 
+			sound.last_corridor = soundManager.createSound({id: 'last_corridor', url:'/the-house-game/sound/corridor' + sound_ext, autoLoad: true}); 
 			sound.aquarium = soundManager.createSound({id: 'aquarium', url:'/the-house-game/sound/aquarium' + sound_ext, autoLoad: true}); 
 			sound.picture = soundManager.createSound({id: 'picture', url:'/the-house-game/sound/picture_snow' + sound_ext, autoLoad: true});
 			sound.picture_snow = soundManager.createSound({id: 'picture_snow', url:'/the-house-game/sound/picture_snow' + sound_ext, autoLoad: true});
