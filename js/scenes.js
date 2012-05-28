@@ -112,7 +112,7 @@ var scene = {
 		function scene_corridor() {
 
 			var window_x    = $(window).width(),
-					window_y    = $(window).height();
+				window_y    = $(window).height();
 			
 			//play scary sound
 			sound_scene_corridor.play();
@@ -738,6 +738,118 @@ var scene = {
 				}, 4000);
 
 			});
+
+	},
+
+	darkness1: function() {
+
+		var play = function() {
+
+			var $canvas = $('#last_corridor'),
+				$text = $('#darkness').find('.text'),
+				$menu = $('#settings, #button, #switch_sound'),
+				window_x = $(window).width(),
+				window_y = $(window).height();
+
+			$menu.addClass('dim');
+			scene.no_click(true, 'rgba(0, 0, 0, .3)');
+
+			setTimeout(function() {
+
+				$canvas.animate({
+					left: window_x/2 - 1000,
+					top:  window_y/2 - 500		
+				}, 5000, function() {
+					sound_darkness.play();
+					$text
+						.text('Fssssssss')
+						.animate({opacity: 1}, 500);
+					setTimeout(function() {
+						$text.animate({opacity: 0}, 1000);
+						room.center(true,5000);
+						setTimeout(function() {
+							scene.no_click(false);
+							$menu.removeClass('dim');
+
+							var get_played = $.jStorage.get('played');
+							get_played.push('darkness1');
+							$.jStorage.set('played', get_played);
+						}, 5000);
+					}, 1000);
+				});
+
+			}, 500);
+
+		};
+
+		if ( $.inArray("darkness1", played) === -1 ) {
+				play();
+		}
+
+	},
+
+	darkness2: function() {
+
+		var play = function() {
+
+			var $playerS = $('#sprite'),
+				$canvas = $('#last_corridor'),
+				$text = $('#darkness').find('.text'),
+				$menu = $('#settings, #button, #switch_sound'),
+				window_x = $(window).width(),
+				window_y = $(window).height();
+
+			$menu.addClass('dim');
+			scene.no_click(true, 'rgba(0, 0, 0, .3)');
+
+			setTimeout(function() {
+
+				$playerS
+					.css('background-position', '-620px 0')
+					.text_cloud('Why don\'t you just give up?', 1000);
+
+				setTimeout(function() {
+
+					$canvas.animate({
+						left: window_x/2 - 800,
+						top:  window_y/2 - 1000		
+					}, 5000, function() {
+						sound_darkness.play();
+						$text
+							.text('Leave me alone!')
+							.animate({opacity: 1}, 500);
+						setTimeout(function() {
+							$text.animate({opacity: 0}, 1000);
+							room.center(true,5000);
+							setTimeout(function() {
+								scene.no_click(false);
+								$menu.removeClass('dim');
+							}, 5000);
+						}, 1000);
+					});
+
+				}, 1000);
+
+			}, 500);
+
+		};
+
+		play();
+
+	},
+
+	darkness3: function() {
+
+		var $darkPlr = $('#dark_player');
+
+		$darkPlr.animate({opacity: 1}, 5000, function() {
+			room.the_player.go_to.start({target: '2-38'});
+			$darkPlr.sprite({
+				fps: 4,
+				no_of_frames: 5,
+				play_frames: 5
+			});
+		});
 
 	},
 

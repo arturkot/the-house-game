@@ -3,6 +3,7 @@
 @import "reset.css";
 @import "intro.less";
 @import "mixins.less";
+@import "animations.less";
 @import "picker.less";
 
 @import "room.less";
@@ -10,6 +11,7 @@
 @import "picture.less";
 @import "picture_snow.less";
 @import "corridor.less";
+@import "void.less";
 @import "hidden_corridor.less";
 @import "kitchen.less";
 @import "kitchen_true.less";
@@ -26,6 +28,21 @@
 @import "view.less";
 
 @import "keypad.less";
+
+::selection {
+	background: transparent;
+	color:#fff;
+}
+
+::-moz-selection {
+	background: transparent;
+	color:#fff;
+}
+
+::-webkit-selection {
+	background: transparent;
+	color:#fff;
+}
 
 html, body, 
 #black, #no_click, #the_game, #white, #overlay,

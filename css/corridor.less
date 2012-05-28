@@ -228,5 +228,49 @@ background:url(../images/corridor.jpg) no-repeat;
 		cursor:pointer;
 	}
 
+	#stairs {
+		position: absolute;
+		left: 148px;
+		top: 558px;
+		z-index: 2000;
+		cursor: pointer;
+
+		#stair_1 {
+			width: 50px;
+			height: 4*40px;
+			position: absolute;
+			left: 0;
+			top: 0;		
+			.isometric_top;
+		}
+
+		#stair_2 {
+			width: 4*40px;
+			height: 40px;
+			position: absolute;
+			left: 0;
+			top: 0;
+			.isometric_left;
+		}
+
+		#stair_3 {
+			width: 50px;
+			height: 160px;
+			position: absolute;
+			left: -37px;
+			top: 67px;
+			.isometric_top;
+		}
+
+		#stair_4 {
+			width: 4*40px;
+			height: 50px;
+			position: absolute;
+			left: -32px;
+			top: 64px;
+			.isometric_left;
+		}
+	}
+
 }
 

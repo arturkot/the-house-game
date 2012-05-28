@@ -282,8 +282,8 @@ var npc = {
 				dialogue_box.display({
 					character:false,
 					picture:false,
-					text: 'The furnace wants to eat your note. You may need it later - maybe you should write it down?',
-					options: ['Ok', 'No!']
+					text: 'The furnace wants to eat your note. You may need it later – maybe you should write it down?',
+					options: ['Give a note.', 'Keep a note to yourself.']
 				}, 'big');
 
 				$('#options').on('click', '#option_0', function() {

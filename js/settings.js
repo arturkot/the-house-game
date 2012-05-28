@@ -28,25 +28,25 @@ var settings = {
 		
 		$('#settings_reset').click(function() {
 		
-	      dialogue_box.display({
-	        character:false,
-	        picture:false,
-	        text: 'The game will start from the beggining. Save data will be erased.',
-	        options: ['Ok', 'Cancel']
-	      });
+		  dialogue_box.display({
+			character:false,
+			picture:false,
+			text: 'The game will start from the beggining. Save data will be erased.',
+			options: ['Ok', 'Cancel']
+		  });
 
-	      $('#options').delegate('#option_0', 'click', function() {
-	      	
-	      	$.jStorage.flush();
-	      	window.location.reload();
+		  $('#options').delegate('#option_0', 'click', function() {
+			
+			$.jStorage.flush();
+			window.location.reload();
 
-	      });
+		  });
 
-	      $('#options').delegate('#option_1', 'click', function() {
-	      	
-	      	dialogue_box.destroy();
+		  $('#options').delegate('#option_1', 'click', function() {
+			
+			dialogue_box.destroy();
 
-	      });
+		  });
 		
 		});
 

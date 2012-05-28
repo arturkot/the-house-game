@@ -6,6 +6,11 @@ height: 1352px;
 cursor:move;
 background: url(../images/last_corridor.jpg);
 
+	#player .text_cloud {
+		left: 140px;
+		bottom: 305px;
+	}
+
 	#sprite {
 		background: url(../images/hidden_corridor_player.png) no-repeat 0 0
 	}
@@ -270,6 +275,17 @@ background: url(../images/last_corridor.jpg);
 		.fluoresents;
 	}
 
+	#dark_player {
+		width: 310px;
+		height: 310px;
+		position: absolute;
+		left: 140px;
+		top: 930px;
+		z-index: 1003;
+		opacity: 0;
+		background: url(../images/last_corridor_player_dark.png);
+	}
+
 	#darkness {
 		left: -310px;
 		top: 178px;
@@ -331,6 +347,18 @@ background: url(../images/last_corridor.jpg);
 			background: linear-gradient(left, rgba(0,0,0,1) 95%,rgba(0,0,0,0) 100%);
 		}
 
+		.text {
+			color: #fff;
+			text-align: right;
+			font: 24px/64px 'Neuton', georgia, serif;
+			margin: 280px 410px 0 0;
+			float: right;
+			position: relative;
+			z-index: 1002;
+			opacity: 0;
+			.isometric_left;
+		}
+
 	}
 
 }
@@ -375,45 +403,48 @@ background: url(../images/last_corridor.jpg);
 }
 
 #led_reference {
-	width: 206px;
-	height: 206px;
-	padding: 10px;
+	width: 220px;
+	height: 220px;
 	border-radius: 10px;
 	position: absolute;
 	right: -236px;
 	top: 0;
-	background: -moz-linear-gradient(top, rgba(216,216,216,1) 0%, rgba(165,165,165,1) 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(216,216,216,1)), color-stop(100%,rgba(165,165,165,1)));
-	background: -webkit-linear-gradient(top, rgba(216,216,216,1) 0%,rgba(165,165,165,1) 100%);
-	background: -o-linear-gradient(top, rgba(216,216,216,1) 0%,rgba(165,165,165,1) 100%);
-	background: -ms-linear-gradient(top, rgba(216,216,216,1) 0%,rgba(165,165,165,1) 100%);
-	background: linear-gradient(top, rgba(216,216,216,1) 0%,rgba(165,165,165,1) 100%);
+
+	.table_wrapper {
+		width: 100px;
+		height: 100px;
+		margin: 5px;
+		float: left;
+		background: url(../images/last_corridor_led_panel_small.png);
+	}
 
 	table {
-		width: 103px;
-		height: 103px;
+		width: 90px;
+		height: 90px;
+		margin: 5px;
 		border-collapse: collapse;
-		float: left;
 
 		.cell {
-			border: 1px solid #1f1f1f;
-			background: #808080;
+			width: 18px;
+			height: 18px;
+			background: url(../images/last_corridor_led_small_off.png) no-repeat 50% 50%;
 
 			&.light {
-				background: -moz-linear-gradient(top, rgba(248,80,50,1) 0%, rgba(241,111,92,1) 50%, rgba(246,41,12,1) 51%, rgba(240,47,23,1) 71%, rgba(231,56,39,1) 100%);
-				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(248,80,50,1)), color-stop(50%,rgba(241,111,92,1)), color-stop(51%,rgba(246,41,12,1)), color-stop(71%,rgba(240,47,23,1)), color-stop(100%,rgba(231,56,39,1)));
-				background: -webkit-linear-gradient(top, rgba(248,80,50,1) 0%,rgba(241,111,92,1) 50%,rgba(246,41,12,1) 51%,rgba(240,47,23,1) 71%,rgba(231,56,39,1) 100%);
-				background: -o-linear-gradient(top, rgba(248,80,50,1) 0%,rgba(241,111,92,1) 50%,rgba(246,41,12,1) 51%,rgba(240,47,23,1) 71%,rgba(231,56,39,1) 100%);
-				background: -ms-linear-gradient(top, rgba(248,80,50,1) 0%,rgba(241,111,92,1) 50%,rgba(246,41,12,1) 51%,rgba(240,47,23,1) 71%,rgba(231,56,39,1) 100%);
-				background: linear-gradient(top, rgba(248,80,50,1) 0%,rgba(241,111,92,1) 50%,rgba(246,41,12,1) 51%,rgba(240,47,23,1) 71%,rgba(231,56,39,1) 100%);
+				background-image: url(../images/last_corridor_led_small_on.png);
 			}
 
 		}
 
 	}
+}
 
-	#led-r-u-l {
-		border-radius: 10px 0 0 0;
-	}
+#led_clear {
+	width: 210px;
+	height: 82px;
+	position: absolute;
+	left: 533px;
+	top: 235px;
+	cursor: pointer;
+	background-image: url(../images/last_corridor_led_reset.png); 
 }
 

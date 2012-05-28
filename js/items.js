@@ -46,6 +46,8 @@ var items = {
 		//insert item into the "item holder" 
 		items.add_to_holder('#button', item_name, items.room_name(), item_info);
 
+		$('#items').fadeIn();
+
 	},
 	
 	use: function(item) {
@@ -72,6 +74,10 @@ var items = {
 				text: 'The item "' + item_name + '" has been used!',
 				options: ['Ok']
 			});
+
+			if ($('#items').children().length < 2) {
+				$('#items').fadeOut();
+			}
 		
 		} else {
 		
@@ -130,8 +136,6 @@ var items = {
 		var length = things.length;
 				
 		if ( length > 0 ) { 
-		
-			$('#items_text').remove();
 
 			for (i=0; i<length;  i++) {
 			

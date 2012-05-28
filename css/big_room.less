@@ -10,6 +10,21 @@ background:url(../images/big_room.jpg) no-repeat;
 	#sprite {
 		background: url(../images/picture_player.png) no-repeat 0 0
 	}
+
+	#player_faux {
+		width: 310px;
+		height: 310px;
+		position: absolute;
+		left: 317px;
+		top: 100px;
+		z-index: 151;
+		background: url(../images/picture_player.png) no-repeat -930px 0;
+
+		.text_cloud {
+			left: 160px;
+			top: -40px;
+		}
+	}
 	
 	#shadow  {
 		width: 198px;
@@ -26,7 +41,18 @@ background:url(../images/big_room.jpg) no-repeat;
 		width: 925px;
 		height: 508px
 	}
-	
+
+	#big_room_overlay {
+		width: 100%;
+		height: 100%;
+		position:absolute;
+		left: 0;
+		top: 0;
+		z-index: 2000;
+		display: none;
+		background: url(../images/big_room_overlay.png);
+	}
+
 	#computer {
 		.item(
 			209px,
@@ -37,7 +63,11 @@ background:url(../images/big_room.jpg) no-repeat;
 			245px,
 			
 			e(" url(../images/big_room_computer.png) ")
-		)
+		);
+
+		&.off {
+			background-image: url(../images/big_room_computer_off.png);
+		}
 	}
 
 	#computer_mask {
@@ -52,6 +82,10 @@ background:url(../images/big_room.jpg) no-repeat;
 			e(" url(../images/big_room_computer.png) ")
 		);
 		background-position:0 0;
+
+		&.off {
+			background-image: url(../images/big_room_computer_off.png);
+		}
 	}	
 	
 	#chair {

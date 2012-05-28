@@ -1,4 +1,4 @@
-var v = 3.5;
+var v = 3.7;
 
 if ( v > Number( $.jStorage.get('v') ) ) {
 

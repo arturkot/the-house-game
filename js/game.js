@@ -615,7 +615,7 @@ var game = {
 			room.pulse( $('#glow'), 5000 );
 
 			//assign tooltips
-			$('#door_room, #door_kitchen, #door_toilet, #door_bathroom, #phone_use').tooltip('left');
+			$('#door_room, #door_kitchen, #door_toilet, #door_bathroom, #phone_use, #stairs').tooltip('left');
 			$('#door_big_room, #window').tooltip('right');
 			
 			//go to the hidden corridor
@@ -826,6 +826,41 @@ var game = {
 				});
 			});
 		
+			$('#stairs').on('click', function() {
+				room.the_player.go_to.start({
+					target: '6-6',
+					action: function() {
+						$('#sprite').css('background-position', '-620px 0');
+						scene.no_click(true, 'rgba(0, 0, 0, .3)');
+						$('#settings, #button, #switch_sound').addClass('dim');
+						$('#player').text_cloud('I... I don\'t think it\'s a good idea to go there.', 2000);
+						setTimeout(function() {
+							dialogue_box.display({
+								character:false,
+								picture:false,
+								text: 'Would you like to step into the darkness?',
+								options: ['Ok', 'No!']
+							}, 'small');
+					
+							$('#options').on('click', '#option_1', function() {
+								$('#settings, #button, #switch_sound').removeClass('dim');
+								dialogue_box.destroy();
+							});
+							
+							$('#options').on('click', '#option_0', function() {
+								setTimeout(function() {
+									$('#settings, #button, #switch_sound').removeClass('dim');
+									scene.no_click(false);
+								}, 1000);
+								game.void(11,11);
+							});
+
+						}, 2000);
+
+					}
+				});
+			});
+
 		//execute - END  
 		}
 		
@@ -1042,9 +1077,11 @@ var game = {
 			//pulsing light
 			room.pulse( $('#glow'), 5000 );
 
+			var $the_green_guy = $('#the_green_guy');
+
 			//assign tooltips
 			$('#fridge_use').tooltip('left');
-			
+			$the_green_guy.tooltip('right');
 			/* ===ITEMS=== */
 
 			var creature = $('#table'),
@@ -1056,9 +1093,7 @@ var game = {
 					.sprite({no_of_frames:5, play_frames: 5});
 				}, (Math.random() * 10 + 1)*1000);
 
-				if ( $.inArray("scene_unite", played) !== -1 ||  $.inArray("scene_outside", played) !== -1 ) {
-					scene.no_click(true, 'rgba(0,0,0,.1)');
-				}
+				$the_green_guy.remove();
 
 				setTimeout(function() {
 					if ( $.inArray("scene_unite", played) === -1 ||  $.inArray("scene_outside", played) === -1 ) {
@@ -1067,6 +1102,7 @@ var game = {
 							creature.text_cloud('You have to be at least partially complete to travel...', 2000);
 						}, 3500);
 					} else {
+						scene.no_click(true, 'rgba(0,0,0,.1)');
 						creature.text_cloud('You\'re ready now. You can go...', 5000);
 						
 						setTimeout(function() {
@@ -1105,18 +1141,7 @@ var game = {
 														})
 														.delay(2000)
 														.animate({opacity: 1}, 500);
-													var levitate = function() {
-														$el.transition({
-															y: '-=10px'
-														}, 500, function() {
-															$(this).transition({
-																y: '+=10px'
-															}, 500, function() {
-																levitate();
-															});
-														});
-													};
-													levitate();
+													$el.addClass('levitate');
 														setTimeout(function() {
 															soundManager.stopAll();
 															sound_train.play();
@@ -1526,20 +1551,33 @@ var game = {
 				
 			});
 
-			//look through the window
+
+			var $computer = $('#computer_mask').add('#computer');
+
+			if ($.inArray("scene_computer", played) !== -1 ) {
+				$computer.addClass('off');
+				$('#computer_use')
+					.attr('data-tooltip', 'It doesn\'t work anymore...')
+					.css('cursor', 'help');
+			}
+
 			$('#computer_use').click(function () {
 				//on click goes to the specified target, then fires function (or not ;) )
-				room.the_player.go_to.start({
-					target: '3-14',
-					action: function() {
-						var lightbox = $('#lightbox'),
-							computer_screen = $('<div id="computer_screen" />').appendTo(lightbox);
+
+				if ($.inArray("scene_computer", played) === -1 ) {
+
+					room.the_player.go_to.start({
+						target: '3-14',
+						action: function() {
+
+							var lightbox = $('#lightbox'),
+								computer_screen = $('<div id="computer_screen" />').appendTo(lightbox);
+
 							if ($('div.close') === -1) {
 								lightbox.append('<div class="close" />');
 							}
 							lightbox.fadeIn();
 
-						if ($.inArray("scene_computer", played) === -1 ) {
 							var noise_1 = $('<div id="noise_1" />').appendTo(computer_screen),
 								noise_2 = $('<div id="noise_2" />').appendTo(computer_screen);
 
@@ -1589,6 +1627,11 @@ var game = {
 								get_played.push('scene_computer');
 								$.jStorage.set('played', get_played);	
 								
+								$computer.addClass('off');
+								$('#computer_use')
+									.attr('data-tooltip', 'It doesn\'t work anymore...')
+									.css('cursor', 'help');
+
 								$('#status').text(']awe[∑ĽfWńĶ•');
 
 								setTimeout(function() {
@@ -1615,17 +1658,19 @@ var game = {
 								$('#status').find('span.question, span.cursor').off();
 								activate();
 							});
-						} else {
-							computer_screen.css('background', '#000');
-						}
 
-						$('div.close').click(function() {
-							computer_screen.remove();
-							clearInterval(window.computer_distortions);
-							lightbox.fadeOut();
-						});
-					}  
-				});
+							$('div.close').click(function() {
+								computer_screen.remove();
+								clearInterval(window.computer_distortions);
+								lightbox.fadeOut();
+							});
+						}  
+					});
+
+				} else {
+					return false;
+				}
+
 			});
 
 			//execute - END  
@@ -1916,6 +1961,8 @@ var game = {
 		execute: function() {
 			
 			var $door_train = $('#door_train'),
+				$playerS = $('#sprite'),
+				$darkPlr = $('#dark_player'),
 				$darkness = $('#darkness'),
 				$lightbox = $('#lightbox').hide(),
 				$close = $lightbox.find('.close');
@@ -1945,293 +1992,312 @@ var game = {
 				});
 			});
 
-		// LEDs puzzle
-		var ledsPuzzle = function(thePattern, upperLeft, upperRight, lowerRight, callback) {
+			setTimeout(function() {
+				$playerS.css('background-position', '-620px 0');
+				scene.darkness1();
+			}, 100);
 
-			// clear boards
-			$lightbox.find('.light').removeClass('light');
+			// LEDs puzzle
+			var ledsPuzzle = function(thePattern, upperLeft, upperRight, lowerRight, callback) {
 
-			var	$ledBody = $('#led_panel_body'),
-				$cell = $ledBody.find('td.cell'),
-				$lowerLeft = $('#led-r-l-l');
+				// clear boards
+				$lightbox.find('.light').removeClass('light');
 
-			var $adjacents = function($el, $where) {
-				var $td = $el,
-					$tr = $el.closest('tr')
-					thisX = parseInt($td.attr('class').split(' ')[1].split('-')[1], 10),
-					thisY = parseInt($tr.attr('class').split('-')[1], 10);
+				var	$ledBody = $('#led_panel_body'),
+					$cell = $ledBody.find('td.cell'),
+					$lowerLeft = $('#led-r-l-l'),
+					$reset = $('#led_clear');
 
-				return $el
-							.add($tr.children('td.col-' + (thisX-1)))
-							.add($tr.children('td.col-' + (thisX+1)))
-							.add($where.find('tr.row-' + (thisY-1)).children('td.col-' + thisX))
-							.add($where.find('tr.row-' + (thisY+1)).children('td.col-' + thisX))
-			};
+				$reset.on('click', function() {
+					$(this)
+						.stop()
+						.animate({top: 240}, 100)
+						.animate({top: 235}, 100);
+					$cell.removeClass('light');
+				});
 
-			var $related = function($el, $where) {
-				var $td = $el,
-					$tr = $el.closest('tr')
-					thisX = parseInt($td.attr('class').split(' ')[1].split('-')[1], 10),
-					thisY = parseInt($tr.attr('class').split('-')[1], 10)
-					$target = $where.find('tr.row-' + thisY).children('td.col-' + thisX);
-
-				return $target.add($adjacents($target, $where));
-			};
-
-			var cellSelector = function (array, $where) {
-				for (var i=0, j = array.length; i<j; i++) {
-					$where
-						.find('tr.row-' + array[i][0])
-						.children('td.col-' + array[i][1])
-						.addClass('light');
-				}
-			};
-
-			var generateArr = function($where) {
-				var $active = $where.find('.light'),
-					thisArr = [];
-
-				$active.each(function() {
-					var $td = $(this),
-						$tr = $(this).closest('tr')
+				var $adjacents = function($el, $where) {
+					var $td = $el,
+						$tr = $el.closest('tr')
 						thisX = parseInt($td.attr('class').split(' ')[1].split('-')[1], 10),
 						thisY = parseInt($tr.attr('class').split('-')[1], 10);
-					thisArr.push([thisY, thisX]);
-				});
 
-				return thisArr;
+					return $el
+								.add($tr.children('td.col-' + (thisX-1)))
+								.add($tr.children('td.col-' + (thisX+1)))
+								.add($where.find('tr.row-' + (thisY-1)).children('td.col-' + thisX))
+								.add($where.find('tr.row-' + (thisY+1)).children('td.col-' + thisX))
+				};
 
+				var $related = function($el, $where) {
+					var $td = $el,
+						$tr = $el.closest('tr')
+						thisX = parseInt($td.attr('class').split(' ')[1].split('-')[1], 10),
+						thisY = parseInt($tr.attr('class').split('-')[1], 10)
+						$target = $where.find('tr.row-' + thisY).children('td.col-' + thisX);
+
+					return $target.add($adjacents($target, $where));
+				};
+
+				var cellSelector = function (array, $where) {
+					for (var i=0, j = array.length; i<j; i++) {
+						$where
+							.find('tr.row-' + array[i][0])
+							.children('td.col-' + array[i][1])
+							.addClass('light');
+					}
+				};
+
+				var generateArr = function($where) {
+					var $active = $where.find('.light'),
+						thisArr = [];
+
+					$active.each(function() {
+						var $td = $(this),
+							$tr = $(this).closest('tr')
+							thisX = parseInt($td.attr('class').split(' ')[1].split('-')[1], 10),
+							thisY = parseInt($tr.attr('class').split('-')[1], 10);
+						thisArr.push([thisY, thisX]);
+					});
+
+					return thisArr;
+
+				};
+
+				var compareArr = function(arr1, arr2) {
+					if (arr1.length != arr2.length) { return false; }
+					var a = arr1.sort(),
+						b = arr2.sort();
+
+					for (var i = 0; arr2[i]; i++) {
+						if (a[i][0] !== b[i][0] || a[i][1] !== b[i][1]) {
+								return false;
+						}
+					}
+					return true;
+				};
+
+				cellSelector(upperLeft, $('#led-r-u-l'));
+				cellSelector(upperRight, $('#led-r-u-r'));
+				cellSelector(lowerRight, $('#led-r-l-r'));
+
+				$cell
+					.off()
+					.on('click', function() {
+						sound_button.play();
+						$adjacents($(this), $ledBody)
+							.add($related($(this), $lowerLeft))
+							.toggleClass('light');
+
+						if (compareArr(generateArr($ledBody), thePattern)) {
+							callback();
+						}
+					})
+					.on('mouseenter', function() {
+						$adjacents($(this), $ledBody).addClass('highlight');
+					})
+					.on('mouseleave', function() {
+						$adjacents($(this), $ledBody).removeClass('highlight');
+					});
+
+			// ledsPuzzle - END
 			};
 
-			var compareArr = function(arr1, arr2) {
-				if (arr1.length != arr2.length) { return false; }
-				var a = arr1.sort(),
-					b = arr2.sort();
-
-				for (var i = 0; arr2[i]; i++) {
-					if (a[i][0] !== b[i][0] || a[i][1] !== b[i][1]) {
-							return false;
-					}
-				}
-				return true;
+			var activated1 = function() {
+				$led1
+					.off()
+					.attr('data-tooltip', 'It works now!')
+					.css('cursor', 'help')
+					.tooltip('right');
+				$('#led_1')
+					.add($light1)
+					.addClass('on');
+				$darkness.addClass('retract_1');
 			};
 
-			cellSelector(upperLeft, $('#led-r-u-l'));
-			cellSelector(upperRight, $('#led-r-u-r'));
-			cellSelector(lowerRight, $('#led-r-l-r'));
+			if ( $.inArray("darkness_retract1", played) !== -1 ) {
+				activated1();
+			} else {
+				$led1.on('click', function() {
+					room.the_player.go_to.start({
+						target: '0-9',
+						action: function() {
+							$lightbox.fadeIn();
 
-			$cell
-				.off()
-				.on('click', function() {
-					sound_button.play();
-					$adjacents($(this), $ledBody)
-						.add($related($(this), $lowerLeft))
-						.toggleClass('light');
+							var	thePattern = [
+									[1,1], [1,2], [1,3], [1,4], [1,5],
+									[2,1], [2,3], [2,5],
+									[3,1], [3,2], [3,3], [3,4], [3,5],
+									[4,2], [4,4]
+								],
+								upperLeft = [
+									[1,3], [1,4], [1,5],
+									[2,2], [2,3], [2,5],
+									[3,3], [3,4], [3,5],
+									[4,2], [4,3], [4,5],
+									[5,3], [5,4], [5,5]
+								],
+								upperRight = [
+									[2,2], [2,4],
+									[3,1], [3,2], [3,3], [3,4], [3,5],
+									[4,1], [4,3], [4,5],
+									[5,1], [5,2], [5,3], [5,4], [5,5]
+								],
+								lowerRight = [
+									[1,1], [1,2], [1,3],
+									[2,1], [2,3], [2,4],
+									[3,1], [3,2], [3,3],
+									[4,1], [4,3], [4,4],
+									[5,1], [5,2], [5,3]
+								]
 
-					if (compareArr(generateArr($ledBody), thePattern)) {
-						callback();
-					}
-				})
-				.on('mouseenter', function() {
-					$adjacents($(this), $ledBody).addClass('highlight');
-				})
-				.on('mouseleave', function() {
-					$adjacents($(this), $ledBody).removeClass('highlight');
+							ledsPuzzle(thePattern, upperLeft, upperRight, lowerRight, function() {
+								sound_beep.play();
+								setTimeout(function() {
+									var get_played = $.jStorage.get('played');
+									get_played.push('darkness_retract1');
+									$.jStorage.set('played', get_played);
+									$lightbox.fadeOut();
+									$darkness
+										.add($light1)
+										.addClass('crawl')
+									sound_darkness_retract.play();
+									activated1();
+								}, 1000);
+							});
+						}
+					});
+				// led1.click - END
 				});
+			// if retract1 played - END
+			}
 
-		// ledsPuzzle - END
-		};
+			var activated2 = function() {
+				$led2
+					.off()
+					.attr('data-tooltip', 'It works now!')
+					.css('cursor', 'help')
+					.tooltip('right');
+				$('#led_2')
+					.add($light2)
+					.addClass('on');
+				$darkness.addClass('retract_2');
+			};
 
-		var activated1 = function() {
-			$led1
-				.off()
-				.attr('data-tooltip', 'It works now!')
-				.css('cursor', 'help')
-				.tooltip('right');
-			$('#led_1')
-				.add($light1)
-				.addClass('on');
-			$darkness.addClass('retract_1');
-		};
+			if ( $.inArray("darkness_retract2", played) !== -1 ) {
+				activated2();
+			} else {
+				$led2.on('click', function() {
+					room.the_player.go_to.start({
+						target: '0-21',
+						action: function() {
+							$lightbox.fadeIn();
 
-		if ( $.inArray("darkness_retract1", played) !== -1 ) {
-			activated1();
-		} else {
-			$led1.on('click', function() {
-				room.the_player.go_to.start({
-					target: '0-9',
-					action: function() {
-						$lightbox.fadeIn();
+							var	thePattern = [
+									[2,2], [2,4],
+									[4,2], [4,4]
+								],
+								upperLeft = [
+									[2,2], [2,4],
+									[4,2], [4,4]
+								],
+								upperRight = [
+									[2,2], [2,4],
+									[4,2], [4,4]
+								],
+								lowerRight = [
+									[2,2], [2,4],
+									[4,2], [4,4]
+								]
 
-						var	thePattern = [
-								[1,1], [1,2], [1,3], [1,4], [1,5],
-								[2,1], [2,3], [2,5],
-								[3,1], [3,2], [3,3], [3,4], [3,5],
-								[4,2], [4,4]
-							],
-							upperLeft = [
-								[1,3], [1,4], [1,5],
-								[2,2], [2,3], [2,5],
-								[3,3], [3,4], [3,5],
-								[4,2], [4,3], [4,5],
-								[5,3], [5,4], [5,5]
-							],
-							upperRight = [
-								[2,2], [2,4],
-								[3,1], [3,2], [3,3], [3,4], [3,5],
-								[4,1], [4,3], [4,5],
-								[5,1], [5,2], [5,3], [5,4], [5,5]
-							],
-							lowerRight = [
-								[1,1], [1,2], [1,3],
-								[2,1], [2,3], [2,4],
-								[3,1], [3,2], [3,3],
-								[4,1], [4,3], [4,4],
-								[5,1], [5,2], [5,3]
-							]
-
-						ledsPuzzle(thePattern, upperLeft, upperRight, lowerRight, function() {
-							sound_beep.play();
-							setTimeout(function() {
-								var get_played = $.jStorage.get('played');
-								get_played.push('darkness_retract1');
-								$.jStorage.set('played', get_played);
-								$lightbox.fadeOut();
-								$darkness
-									.add($light1)
-									.addClass('crawl')
-								sound_darkness_retract.play();
-								activated1();
-							}, 1000);
-						});
-					}
+							ledsPuzzle(thePattern, upperLeft, upperRight, lowerRight, function() {
+								sound_beep.play();
+								setTimeout(function() {
+									var get_played = $.jStorage.get('played');
+									get_played.push('darkness_retract2');
+									$.jStorage.set('played', get_played);
+									$lightbox.fadeOut();
+									$darkness
+										.add($light2)
+										.addClass('crawl')
+									sound_darkness_retract.play();
+									activated2();
+									scene.darkness2();
+								}, 1000);
+							});
+						}
+					});
+				// led1.click - END
 				});
-			// led1.click - END
+			// if retract2 played - END
+			}
+
+			var activated3 = function() {
+				$led3
+					.off()
+					.attr('data-tooltip', 'It works now!')
+					.css('cursor', 'help')
+					.tooltip('right');
+				$('#led_3')
+					.add($light3)
+					.addClass('on');
+				$darkness.addClass('gone');
+				setTimeout(function() {
+					$darkness.hide();
+				}, 10000);
+			};
+
+			if ( $.inArray("darkness_retract3", played) !== -1 ) {
+				activated3();
+			} else {
+				$led3.on('click', function() {
+					room.the_player.go_to.start({
+						target: '0-33',
+						action: function() {
+							$lightbox.fadeIn();
+
+							var	thePattern = [
+									[1,2], [2,4],
+									[5,1], [4,5]
+								],
+								upperLeft = [
+									[1,1], [2,5],
+									[4,4], [5,2]
+								],
+								upperRight = [
+									[1,5], [2,1],
+									[4,2], [5,4]
+								],
+								lowerRight = [
+									[1,4], [2,2],
+									[4,1], [5,5]
+								]
+
+							ledsPuzzle(thePattern, upperLeft, upperRight, lowerRight, function() {
+								sound_beep.play();
+								setTimeout(function() {
+									var get_played = $.jStorage.get('played');
+									get_played.push('darkness_retract3');
+									$.jStorage.set('played', get_played);
+									$lightbox.fadeOut();
+									$darkness
+										.add($light3)
+										.addClass('crawl')
+									sound_darkness_retract.play();
+									scene.darkness3();
+									activated3();
+								}, 1000);
+							});
+						}
+					});
+				// led1.click - END
+				});
+			// if retract3 played - END
+			}
+
+			$close.on('click', function() {
+				$lightbox.fadeOut();
 			});
-		// if retract1 played - END
-		}
-
-		var activated2 = function() {
-			$led2
-				.off()
-				.attr('data-tooltip', 'It works now!')
-				.css('cursor', 'help')
-				.tooltip('right');
-			$('#led_2')
-				.add($light2)
-				.addClass('on');
-			$darkness.addClass('retract_2');
-		};
-
-		if ( $.inArray("darkness_retract2", played) !== -1 ) {
-			activated2();
-		} else {
-			$led2.on('click', function() {
-				room.the_player.go_to.start({
-					target: '0-21',
-					action: function() {
-						$lightbox.fadeIn();
-
-						var	thePattern = [
-								[2,2], [2,4],
-								[4,2], [4,4]
-							],
-							upperLeft = [
-								[2,2], [2,4],
-								[4,2], [4,4]
-							],
-							upperRight = [
-								[2,2], [2,4],
-								[4,2], [4,4]
-							],
-							lowerRight = [
-								[2,2], [2,4],
-								[4,2], [4,4]
-							]
-
-						ledsPuzzle(thePattern, upperLeft, upperRight, lowerRight, function() {
-							sound_beep.play();
-							setTimeout(function() {
-								var get_played = $.jStorage.get('played');
-								get_played.push('darkness_retract2');
-								$.jStorage.set('played', get_played);
-								$lightbox.fadeOut();
-								$darkness
-									.add($light2)
-									.addClass('crawl')
-								sound_darkness_retract.play();
-								activated2();
-							}, 1000);
-						});
-					}
-				});
-			// led1.click - END
-			});
-		// if retract2 played - END
-		}
-
-		var activated3 = function() {
-			$led3
-				.off()
-				.attr('data-tooltip', 'It works now!')
-				.css('cursor', 'help')
-				.tooltip('right');
-			$('#led_3')
-				.add($light3)
-				.addClass('on');
-			$darkness.addClass('gone');
-		};
-
-		if ( $.inArray("darkness_retract3", played) !== -1 ) {
-			activated3();
-		} else {
-			$led3.on('click', function() {
-				room.the_player.go_to.start({
-					target: '0-33',
-					action: function() {
-						$lightbox.fadeIn();
-
-						var	thePattern = [
-								[1,2], [2,4],
-								[5,1], [4,5]
-							],
-							upperLeft = [
-								[1,1], [2,5],
-								[4,4], [5,2]
-							],
-							upperRight = [
-								[1,5], [2,1],
-								[4,2], [5,4]
-							],
-							lowerRight = [
-								[1,4], [2,2],
-								[4,1], [5,5]
-							]
-
-						ledsPuzzle(thePattern, upperLeft, upperRight, lowerRight, function() {
-							sound_beep.play();
-							setTimeout(function() {
-								var get_played = $.jStorage.get('played');
-								get_played.push('darkness_retract3');
-								$.jStorage.set('played', get_played);
-								$lightbox.fadeOut();
-								$darkness
-									.add($light3)
-									.addClass('crawl')
-								sound_darkness_retract.play();
-								activated3();
-							}, 1000);
-						});
-					}
-				});
-			// led1.click - END
-			});
-		// if retract3 played - END
-		}
-
-		$close.on('click', function() {
-			$lightbox.fadeOut();
-		});
 
 		//execute - END  
 		}
@@ -2240,6 +2306,140 @@ var game = {
 
 	//last_corridor - END
 	},
+
+
+	void: function(x,y) {
+	
+		//generates start room
+		room.generate({
+		
+		inject:'void',
+		
+		grid_width: 25,
+		grid_height: 25,
+		
+		collision_nodes: [],
+		
+		drag_room:true,
+		
+		player: 'player',
+		player_speed: 100,
+		player_position_x: x,
+		player_position_y: y,
+		
+		volume:50,
+		
+		execute: function() {
+			
+			setTimeout(function() {
+				var $player = $('#player'),
+					x = $player.data('x'),
+					y = $player.data('y'),
+					$tile = $('#' + x + '-' + y);
+
+				$('#use_door').tooltip('right');
+
+				sound_woosh.play();
+				$('#door')
+					.add('#use_door')
+					.css({
+						left: parseFloat($tile.css('left'))-33,
+						top: parseFloat($tile.css('top'))-241
+					})
+					.fadeIn()
+					.end()
+					.css('z-index', $tile.data('z') - 3);
+			}, 10000);
+
+		//execute - END  
+		}
+		
+		});
+
+	//void - END
+	},
+
+	void_big_room: function(x,y) {
+
+		//generates start room
+		room.generate({
+		
+			inject:'void_big_room',
+			
+			grid_width: 8,
+			grid_height: 19,
+			collision_nodes: [],
+			
+			drag_room:true,
+			
+			player: 'player',
+			player_speed: 100,
+			player_position_x: x,
+			player_position_y: y,
+			
+			volume:0,
+			
+			execute: function() {
+				scene.no_click(true, 'rgba(0, 0, 0, .3)');
+				$('#settings, #button, #switch_sound').addClass('dim');
+
+				var	$player = $('#player'),
+					$sprite = $('#sprite'),
+					$thisRoom = $('#big_room'),
+					$fauxPlayer = $('#player_faux'),
+					$overlay = $('#big_room_overlay');
+
+
+				setTimeout(function() {
+					$sprite.css('background-position', '-930px 0');
+					$thisRoom.css({
+						left: $(window).width()/2 - 462,
+						top: $(window).height()/2 - 250
+					});
+					sound_door.play();
+					$fauxPlayer.text_cloud('!!!', 1500);
+					setTimeout(function() {
+						$overlay
+							.fadeIn(200, function() {
+								$overlay.fadeOut(1000);
+							});
+
+						sound_screech2.play();
+						$fauxPlayer
+							.css('background-image', 'url(images/void_merge.png)')
+							.sprite({
+								fps: 12,
+								no_of_frames: 12,
+								play_frames: 12
+							})
+							.delay(1000)
+							.fadeOut(500);
+					}, 1500);
+					setTimeout(function() {
+						$player.text_cloud('?', 1500);
+						room.the_player.go_to.start({
+							target: '6-6',
+							action: function() {
+								$player.text_cloud('What the..?!!', 2000);
+							}  
+						});
+					}, 1000);
+				}, 100);
+
+				if ($.inArray("scene_computer", played) !== -1 ) {
+					$computer.addClass('off');
+					$('#computer_use')
+						.attr('data-tooltip', 'It doesn\'t work anymore...')
+						.css('cursor', 'help');
+				}
+
+			//execute - END  
+			}
+		
+		});
+
+	//big room - END
+	}
 
 //game - END  
 };
@@ -2312,7 +2512,7 @@ soundManager.onready(function() {
 			$('#head_hole, #head_back, #logo').fadeOut('500');
 			$('#house').fadeOut('1000');
 
-			$('#items, #switch_sound, #settings').fadeIn();
+			$('#switch_sound, #settings').fadeIn();
 		 
 			$('#lightbox').hide();
 
@@ -2384,6 +2584,14 @@ soundManager.onready(function() {
 			} else if (is_in === 'last_corridor') {
 			
 				game.last_corridor(0,6);
+
+			} else if (is_in === 'void') {
+			
+				game.void(11,11);
+
+			} else if (is_in === 'void_big_room') {
+			
+				game.void_big_room(7,9);
 
 			}
 

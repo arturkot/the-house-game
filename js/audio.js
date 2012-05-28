@@ -17,6 +17,7 @@
 			sound_clang = soundManager.createSound({id: 'sound_clang', url:'/the-house-game/sound/clang' + sound_ext, autoLoad: true});
 			sound_clong = soundManager.createSound({id: 'sound_clong', url:'/the-house-game/sound/clong' + sound_ext, autoLoad: true});
 			sound_creak = soundManager.createSound({id: 'sound_creak', url:'/the-house-game/sound/creak' + sound_ext, autoLoad: true}); 
+			sound_darkness = soundManager.createSound({id: 'darkness', url:'/the-house-game/sound/darkness' + sound_ext, autoLoad: true}); 
 			sound_darkness_retract = soundManager.createSound({id: 'darkness_retract', url:'/the-house-game/sound/darkness_retract' + sound_ext, autoLoad: true}); 
 			sound_door = soundManager.createSound({id: 'sound_door', url:'/the-house-game/sound/door' + sound_ext, autoLoad: true}); 
 			sound_door_locked = soundManager.createSound({id: 'sound_door_locked', url:'/the-house-game/sound/door_locked' + sound_ext, autoLoad: true}); 
@@ -27,6 +28,7 @@
 			sound_scene_corridor = soundManager.createSound({id: 'sound_corridor', url:'/the-house-game/sound/scene_corridor' + sound_ext, autoLoad: true});
 			sound_scene_corridor_phone = soundManager.createSound({id: 'sound_corridor_phone', url:'/the-house-game/sound/scene_corridor_phone' + sound_ext, autoLoad: true});
 			sound_screech = soundManager.createSound({id: 'sound_screech', url:'/the-house-game/sound/screech' + sound_ext, autoLoad: true});
+			sound_screech2 = soundManager.createSound({id: 'sound_screech2', url:'/the-house-game/sound/screech2' + sound_ext, autoLoad: true});
 			sound_shower_curtain = soundManager.createSound({id: 'sound_shower_curtain', url:'/the-house-game/sound/shower_curtain' + sound_ext, autoLoad: true});
 			sound_switch = soundManager.createSound({id: 'sound_switch', url:'/the-house-game/sound/switch' + sound_ext, autoLoad: true}); 
 			sound_teleport = soundManager.createSound({id: 'sound_teleport', url:'/the-house-game/sound/teleport' + sound_ext, autoLoad: true});
@@ -47,9 +49,11 @@
 			sound.toilet = soundManager.createSound({id: 'toilet', url:'/the-house-game/sound/corridor' + sound_ext, autoLoad: true});
 			sound.bathroom = soundManager.createSound({id: 'bathroom', url:'/the-house-game/sound/room' + sound_ext, autoLoad: true});
 			sound.big_room = soundManager.createSound({id: 'big_room', url:'/the-house-game/sound/room' + sound_ext, autoLoad: true});
+			sound.void_big_room = soundManager.createSound({id: 'void_big_room', url:'/the-house-game/sound/room' + sound_ext, autoLoad: true});
 			sound.boiler_room = soundManager.createSound({id: 'boiler_room', url:'/the-house-game/sound/boiler_room' + sound_ext, autoLoad: true});
 			sound.fridge = soundManager.createSound({id: 'fridge', url:'/the-house-game/sound/picture_snow' + sound_ext, autoLoad: true});
 			sound.train = soundManager.createSound({id: 'train', url:'/the-house-game/sound/train' + sound_ext, autoLoad: true});
+			sound.void = soundManager.createSound({id: 'void', url:'/the-house-game/sound/void' + sound_ext, autoLoad: true});
 
 		}); 
 		
