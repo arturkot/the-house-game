@@ -40,6 +40,8 @@ var room = {
 		volume: 50,
 		
 		preload: [],
+
+		fade_color: 'black',
 		
 		zdetection: function() {return false;},
 		execute: function() {}
@@ -47,9 +49,12 @@ var room = {
 	},
 	
 	generate: function(settings) {
+
+		$.extend(room.settings, settings);
+
 		//view fades in
 		$('<div/>', {
-				id: 'black'
+				id: room.settings.fade_color
 		})
 		.appendTo('body')
 		.css({
@@ -64,7 +69,11 @@ var room = {
 		}, 1000, function() {
 		
 			//reset room
-			$('body').css('background', '#000');
+			if (room.settings.fade_color === 'white') {
+				$('body').css('background', '#fff');
+			} else {
+				$('body').css('background', '#000');
+			}
 
 			if (room.settings.inject) {
 
@@ -74,9 +83,8 @@ var room = {
 
 			setTimeout(function() {
 			
-				$.extend(room.settings, settings);
-
 				$('#black').remove();
+				$('#white').remove();
 				room.inject();
 			
 			}, 500);
@@ -107,10 +115,10 @@ var room = {
 				sound_loop(sound_background);
 			
 				$('body').css('background', '#000');
-			
+
 				//view fades in
 				$('<div/>', {
-						id: 'black'
+						id: room.settings.fade_color
 				})
 				.appendTo('body')
 				.css({
@@ -124,7 +132,7 @@ var room = {
 				
 				}, 1000, function() {
 				
-					$('body').find('#black').remove();
+					$('body').find('#' + room.settings.fade_color).remove();
 				
 				});
 			

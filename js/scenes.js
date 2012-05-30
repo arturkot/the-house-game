@@ -365,6 +365,92 @@ var scene = {
 	//mirror - END
 	},
 
+	bathroom_void_shower: function() {
+		scene.no_click(true, 'rgba(0, 0, 0, .3)');
+		$('#settings, #button, #switch_sound').addClass('dim');
+
+		game.bathroom_setup();
+
+		var	$player = $('#player'),
+			$sprite = $('#sprite'),
+			$thisRoom = $('#bathroom'),
+			$fauxPlayer = $('#faux_player'),
+			$mergedPlayer = $('<div id="dark_character" />').appendTo('#floor').hide();
+
+		setTimeout(function() {
+			$sprite.css('background-position', '-310px 0');
+			$thisRoom.css({
+				left: $(window).width()/2 - 100,
+				top: $(window).height()/2 - 260
+			});
+
+			var $overlay = $('<div id="bathroom_overlay" />').appendTo('#bathroom').css('z-index', 1000);
+
+			$fauxPlayer.text_cloud('!!!', 1000);
+
+			setTimeout(function() {
+				sound_screech2.play();
+
+				$fauxPlayer
+					.css('background-image', 'url(images/void_merge.png)')
+					.sprite({
+						fps: 12,
+						no_of_frames: 12,
+						play_frames: 12
+					})
+					.delay(1000)
+					.fadeOut(500);
+
+				setTimeout(function() {
+					$overlay.animate({opacity: 0}, 2500, 'linear', function() {
+						$(this).remove();
+					});
+				}, 1000);
+
+				setTimeout(function() {
+					sound_shower_curtain.play();
+					$('#curtain').css('opacity', 0);
+					$('#curtain_folded').css('opacity', 1);
+					room.the_player.go_to.start({
+						target: '3-7',
+						action: function() {
+							$player.text_cloud('WHAT the...!?', 2000);
+							$sprite.css('background-position', '-310px 0');
+						}
+					});
+				}, 500);
+
+				$mergedPlayer
+					.sprite({
+						no_of_frames:7
+					})
+					.delay(1000)
+					.fadeIn(500)
+					.delay(1000)
+					.fadeOut(500);
+
+				setTimeout(function() {
+					$overlay.fadeOut(500);
+					scene.no_click(false);
+					$('#settings, #button, #switch_sound').removeClass('dim');
+					var get_played = $.jStorage.get('played');
+					get_played.push('scene_void_shower');
+					$.jStorage.set('played', get_played);
+				}, 1000);
+
+			}, 1500);
+
+		}, 100);
+
+		if ($.inArray("scene_computer", played) !== -1 ) {
+			$computer.addClass('off');
+			$('#computer_use')
+				.attr('data-tooltip', 'It doesn\'t work anymore...')
+				.css('cursor', 'help');
+		}
+	// bathroom_void_shower - END
+	},
+
 	release: function() {
 		//release
 		var release = function(fly, player) {
@@ -805,8 +891,7 @@ var scene = {
 			setTimeout(function() {
 
 				$playerS
-					.css('background-position', '-620px 0')
-					.text_cloud('Why don\'t you just give up?', 1000);
+					.css('background-position', '-620px 0');
 
 				setTimeout(function() {
 
@@ -842,12 +927,85 @@ var scene = {
 
 		var $darkPlr = $('#dark_player');
 
-		$darkPlr.animate({opacity: 1}, 5000, function() {
-			room.the_player.go_to.start({target: '2-38'});
+		scene.no_click(true, 'rgba(0, 0, 0, .3)');
+
+		sound_absorbing.play();
+
+		setTimeout(function() {
 			$darkPlr.sprite({
 				fps: 4,
 				no_of_frames: 5,
 				play_frames: 5
+			});
+		}, 4000);
+
+		$darkPlr.animate({opacity: 1}, 5000, function() {
+			room.the_player.go_to.start({
+				target: '2-40', 
+				action: function() {
+					var $floor = $('#floor'),
+						$player = $('#player'),
+						$dark = $('#dark_player'),
+						$lights = $('#fluorescent_1, #fluorescent_2, #fluorescent_3, #fluorescent_4');
+
+					var $darkness_fill = $('<div id="darkness_fill" />').appendTo($floor).hide(),
+						$darkness_bg = $('<div id="darkness_bg" />').appendTo($floor).hide(),
+						$darkness_bgL = $('<div id="darkness_bg_light" />').appendTo($floor).hide(),
+						$darkness_floor = $('<div id="darkness_floor" />').appendTo($floor).hide(),
+						$darkness_floorL = $('<div id="darkness_floor_light" />').appendTo($floor).hide(),
+						$darkness_wires = $('<div id="darkness_wires" />').appendTo($floor).hide(),
+						$darkEls = $darkness_bg.add($darkness_floor).add($darkness_wires);
+
+					$lights.fadeOut();
+					setTimeout(function() {
+						$darkEls.add($darkness_fill)
+							.delay(1000)
+							.fadeIn(500, function() {
+								$darkness_bg.transition({x: -10}, 10000, 'linear');
+								$darkness_wires.transition({rotate: '10deg'}, 10000, 'linear');
+
+								$player.text_cloud('I guess I have no choice. I need to accept you.', 4000);
+								$dark.text_cloud('I guess I have no choice. I need to accept you.', 4000);
+
+								setTimeout(function() {
+									$player.text_cloud('But this time...', 3000);
+									$dark.text_cloud('But this time...', 3000);
+								}, 4000);
+
+								setTimeout(function() {
+									$player.text_cloud('I\'ll absorb you.', 3000);
+								}, 8000);
+
+								$darkEls
+									.delay(8000)
+									.stop()
+									.transition({opacity: 0}, 1000);
+								$darkness_bgL
+									.add($darkness_floorL)
+									.delay(8000)
+									.fadeIn(1000);
+
+								setTimeout(function() {
+									$('#no_click').css('background', 'transparent');
+									$dark.fadeOut(1000);
+									sound_woosh.play();
+									$('<div id="flash" />')
+									.appendTo($player)
+									.transition({
+										scale:40,
+										opacity:.7
+									}, 2000)
+									.transition({
+										scale:100,
+										opacity:1
+									}, 500, function() {
+										$('body').css('background', '#fff');
+										game.exit(3,3);
+									});
+								}, 13000);
+							});
+					}, 1000);
+				}
 			});
 		});
 

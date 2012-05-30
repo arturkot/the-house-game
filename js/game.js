@@ -830,33 +830,37 @@ var game = {
 				room.the_player.go_to.start({
 					target: '6-6',
 					action: function() {
-						$('#sprite').css('background-position', '-620px 0');
-						scene.no_click(true, 'rgba(0, 0, 0, .3)');
-						$('#settings, #button, #switch_sound').addClass('dim');
-						$('#player').text_cloud('I... I don\'t think it\'s a good idea to go there.', 2000);
-						setTimeout(function() {
-							dialogue_box.display({
-								character:false,
-								picture:false,
-								text: 'Would you like to step into the darkness?',
-								options: ['Ok', 'No!']
-							}, 'small');
-					
-							$('#options').on('click', '#option_1', function() {
-								$('#settings, #button, #switch_sound').removeClass('dim');
-								dialogue_box.destroy();
-							});
-							
-							$('#options').on('click', '#option_0', function() {
-								setTimeout(function() {
+						if ( $.inArray("scene_void_shower", played) === -1 ) {
+							$('#sprite').css('background-position', '-620px 0');
+							scene.no_click(true, 'rgba(0, 0, 0, .3)');
+							$('#settings, #button, #switch_sound').addClass('dim');
+							$('#player').text_cloud('I... I don\'t think it\'s a good idea to go there.', 2000);
+							setTimeout(function() {
+								dialogue_box.display({
+									character:false,
+									picture:false,
+									text: 'Would you like to step into the darkness?',
+									options: ['Ok', 'No!']
+								}, 'small');
+						
+								$('#options').on('click', '#option_1', function() {
 									$('#settings, #button, #switch_sound').removeClass('dim');
-									scene.no_click(false);
-								}, 1000);
-								game.void(11,11);
-							});
+									dialogue_box.destroy();
+								});
+								
+								$('#options').on('click', '#option_0', function() {
+									setTimeout(function() {
+										$('#settings, #button, #switch_sound').removeClass('dim');
+										scene.no_click(false);
+									}, 1000);
+									game.void(11,11);
+								});
 
-						}, 2000);
-
+							}, 2000);
+						} else {
+							$('#sprite').css('background-position', '-620px 0');
+							$('#player').text_cloud('There\'s NO WAY I\'m going there!', 2000);
+						}
 					}
 				});
 			});
@@ -1103,7 +1107,7 @@ var game = {
 						}, 3500);
 					} else {
 						scene.no_click(true, 'rgba(0,0,0,.1)');
-						creature.text_cloud('You\'re ready now. You can go...', 5000);
+						creature.text_cloud('You\'re ready. You can go now...', 5000);
 						
 						setTimeout(function() {
 
@@ -1115,7 +1119,7 @@ var game = {
 									$('#sprite').css('background-position', '-620px 0');
 									$('#player').text_cloud('But... Where?', 2000);
 									setTimeout(function() {
-										creature.text_cloud('You\'ll see!', 4000);
+										creature.text_cloud('To meet with yourself.', 4000);
 
 										sound_woosh.play({volume: 120});
 										$('#light').animate({'opacity': 1}, 500, function() {
@@ -1382,34 +1386,7 @@ var game = {
 	//toilet - END
 	},
 
-	bathroom: function(x,y) {
-
-		//generates start room
-		room.generate({
-		
-		inject:'bathroom',
-		
-		grid_width: 8,
-		grid_height: 9,
-		collision_nodes: [
-			'0-0', '0-1', '0-2', '0-3', '0-4', '0-5', 
-			'1-0', '1-1', '1-2', '1-3', '1-4', '1-5', 
-			'2-1', '2-2', '2-3',
-			'5-4', '5-5', '5-6', '5-7', '5-8', 
-			'6-4', '6-5', '6-6', '6-7', '6-8', 
-			'7-4', '7-5', '7-6', '7-7', '7-8'
-		],
-		
-		drag_room:true,
-		
-		player: 'player',
-		player_speed: 100,
-		player_position_x: x,
-		player_position_y: y,
-		
-		volume:50,
-		
-		execute: function() {
+	bathroom_setup: function() {
 
 		room.transparency( $('#bathtube'), $('#3-2, #3-3, #3-4, #3-5, #3-6, #3-7, #4-2, #4-3, #4-4, #4-5, #4-6, #4-7, #4-8, #5-2, #5-3, #6-2, #6-3, #7-3') );
 
@@ -1434,11 +1411,11 @@ var game = {
 			});
 		});
 
-		if ( $.inArray("scene_shower", played) !== -1) {
+		if ( $.inArray("scene_shower", played) !== -1 || $.inArray("scene_void_shower", played) !== -1 ) {
 			$('#curtain').css('opacity', 0);
 			$('#curtain_folded').css('opacity', 1);
 			$('#curtain_use').css('cursor', 'move');
-		} else {
+		} else if (is_in === "bathroom") {
 			$('#curtain_use').click(function() {
 				room.the_player.go_to.start({
 					target: '0-7',
@@ -1481,6 +1458,39 @@ var game = {
 				}  
 			});
 		});
+	// bathroom_setup
+	},
+
+	bathroom: function(x,y) {
+
+		//generates start room
+		room.generate({
+		
+		inject:'bathroom',
+		
+		grid_width: 8,
+		grid_height: 9,
+		collision_nodes: [
+			'0-0', '0-1', '0-2', '0-3', '0-4', '0-5', 
+			'1-0', '1-1', '1-2', '1-3', '1-4', '1-5', 
+			'2-1', '2-2', '2-3',
+			'5-4', '5-5', '5-6', '5-7', '5-8', 
+			'6-4', '6-5', '6-6', '6-7', '6-8', 
+			'7-4', '7-5', '7-6', '7-7', '7-8'
+		],
+		
+		drag_room:true,
+		
+		player: 'player',
+		player_speed: 100,
+		player_position_x: x,
+		player_position_y: y,
+		
+		volume:50,
+		
+		execute: function() {
+
+			game.bathroom_setup();
 
 		//execute - END  
 		}
@@ -1889,7 +1899,7 @@ var game = {
 		collision_nodes: [
 		
 		//"dead" area
-		'0-0', '0-1', '0-4', '4-0', '4-1', '5-0', '5-2', '5-4', '6-0', '7-0', '8-0', '9-0', '10-0', '11-0', '12-0', '13-0', '14-0', '14-1', '14-4'
+		'0-0', '0-1', '0-4', '4-0', '4-1', '5-0', '5-2', '5-4', '6-0', '7-0', '8-0', '9-0', '10-0', '11-0', '12-0', '13-0', '14-0', '14-1', '14-4', '3-0'
 
 		
 		],
@@ -1908,17 +1918,97 @@ var game = {
 			scene.no_click(false);
 			var $ticket = $('#ticket_inspector');
 
-			setTimeout(function() {
-				$ticket.text_cloud('Good luck!', 1000);
-			}, 1000);
+			if ($.inArray("darkness_retract3", played) !== -1) {
+				$('#exit_sky').remove();
+				$('#use_train_door')
+					.on('click', function() {
+						room.the_player.go_to.start({
+							target: '2-0',
+							action: function() {
+								scene.no_click(true, 'rgba(0, 0, 0, .3)');
+								$('#player').hide();
+								$('#faux_player').show();
 
-			setTimeout(function() {
-				sound_sliding_door.play();
-				$('#train_door').animate({
+								setTimeout(function() {
+									sound_sliding_door.play();
+									$('#train_door').animate({
+										left: 153,
+										top: -262
+									}, 500, function() {
+										sound_train_start.play();
+										var $ring_2 = $('#ring_2');
+										$ring_2.removeClass('rotate');
+										setTimeout(function() {
+											$ring_2.addClass('rotate_faster');
+										}, 100);
+										$('#train').animate({
+											left: $(window).width()/2 - 540,
+											top: $(window).height()/2 + 30
+										}, 2000);
+										setTimeout(function() {
+											$('#train_glow').animate({opacity: 1}, 500, function() {
+												soundManager.stop('train');
+												$('#settings, #button, #switch_sound').fadeOut();
+												$('#train_container').animate({
+													left: '-=5964px',
+													top: '-=2580px'
+												}, 1000, function() {
+													sound_ekg.play();
+													$('#train_platform').fadeOut(2000, function() {
+														setTimeout(function() {
+															$('<div id="ekg" />')
+																.appendTo('body')
+																.animate({
+																	width: $(window).width(),
+																	backgroundColor: '#31c116'
+																}, 8200, 'linear', function() {
+																	soundManager.stopAll();
+																	$('#ekg').fadeOut(4000, function() {
+																		$.jStorage.flush();
+																		window.location.reload();
+																	});
+																});
+														}, 1000);
+													});
+												});
+											});
+										}, 5000);
+									});
+								}, 500);
+							}
+						});
+					})
+					.tooltip('left');
+			} else {
+				$('#use_train_door').remove();
+			}
+
+			if($.inArray("cabin_scene", played) === -1) {
+				setTimeout(function() {
+					$ticket.text_cloud('Good luck!', 1000);
+				}, 1000);
+				setTimeout(function() {
+					sound_sliding_door.play();
+					$('#train_door').animate({
+						left: 153,
+						top: -262
+					}, 500);
+					var get_played = $.jStorage.get('played');
+					get_played.push('cabin_scene');
+					$.jStorage.set('played', get_played);
+				}, 2000);
+			} else if ($.inArray("darkness_retract3", played) !== -1) {
+				$ticket.hide();
+			} else {
+				$('#train_door').css({
 					left: 153,
 					top: -262
-				}, 500);
-			}, 2000);
+				});
+			}
+
+			if($.inArray("darkness_retract3", played) !== -1) {
+				$('#door_dark_corridor').remove();
+			}
 
 			$('#door_dark_corridor').on('click', function() {
 				room.the_player.go_to.start({
@@ -1964,7 +2054,7 @@ var game = {
 				$playerS = $('#sprite'),
 				$darkPlr = $('#dark_player'),
 				$darkness = $('#darkness'),
-				$lightbox = $('#lightbox').hide(),
+				$lightbox = $('#lightbox_led').hide(),
 				$close = $lightbox.find('.close');
 
 			var $led1 = $('#use_led_1'),
@@ -1981,7 +2071,10 @@ var game = {
 				.add($led3)
 				.tooltip('right');
 
-			$darkness.tooltip('left');
+			$darkness
+				.children('div')
+				.add($darkPlr)
+				.tooltip('left');
 
 			$door_train.on('click', function() {
 				room.the_player.go_to.start({
@@ -2009,11 +2102,15 @@ var game = {
 					$reset = $('#led_clear');
 
 				$reset.on('click', function() {
+					sound_button.play();
 					$(this)
 						.stop()
 						.animate({top: 240}, 100)
 						.animate({top: 235}, 100);
-					$cell.removeClass('light');
+					$cell
+						.add($lowerLeft.find('td.cell'))
+						.removeClass('light');
+
 				});
 
 				var $adjacents = function($el, $where) {
@@ -2157,7 +2254,7 @@ var game = {
 									var get_played = $.jStorage.get('played');
 									get_played.push('darkness_retract1');
 									$.jStorage.set('played', get_played);
-									$lightbox.fadeOut();
+									$lightbox.fadeOut(200);
 									$darkness
 										.add($light1)
 										.addClass('crawl')
@@ -2216,7 +2313,7 @@ var game = {
 									var get_played = $.jStorage.get('played');
 									get_played.push('darkness_retract2');
 									$.jStorage.set('played', get_played);
-									$lightbox.fadeOut();
+									$lightbox.fadeOut(200);
 									$darkness
 										.add($light2)
 										.addClass('crawl')
@@ -2242,6 +2339,7 @@ var game = {
 					.add($light3)
 					.addClass('on');
 				$darkness.addClass('gone');
+				scene.darkness3();
 				setTimeout(function() {
 					$darkness.hide();
 				}, 10000);
@@ -2249,6 +2347,9 @@ var game = {
 
 			if ( $.inArray("darkness_retract3", played) !== -1 ) {
 				activated3();
+				var $darkPlr = $('#dark_player');
+				$darkPlr.css('opacity', 1);
+
 			} else {
 				$led3.on('click', function() {
 					room.the_player.go_to.start({
@@ -2279,12 +2380,11 @@ var game = {
 									var get_played = $.jStorage.get('played');
 									get_played.push('darkness_retract3');
 									$.jStorage.set('played', get_played);
-									$lightbox.fadeOut();
+									$lightbox.fadeOut(200);
 									$darkness
 										.add($light3)
 										.addClass('crawl')
 									sound_darkness_retract.play();
-									scene.darkness3();
 									activated3();
 								}, 1000);
 							});
@@ -2296,7 +2396,7 @@ var game = {
 			}
 
 			$close.on('click', function() {
-				$lightbox.fadeOut();
+				$lightbox.fadeOut(200);
 			});
 
 		//execute - END  
@@ -2318,8 +2418,6 @@ var game = {
 		grid_width: 25,
 		grid_height: 25,
 		
-		collision_nodes: [],
-		
 		drag_room:true,
 		
 		player: 'player',
@@ -2337,7 +2435,7 @@ var game = {
 					y = $player.data('y'),
 					$tile = $('#' + x + '-' + y);
 
-				$('#use_door').tooltip('right');
+				
 
 				sound_woosh.play();
 				$('#door')
@@ -2349,6 +2447,23 @@ var game = {
 					.fadeIn()
 					.end()
 					.css('z-index', $tile.data('z') - 3);
+
+				$('#use_door')
+					.on('click', function() {
+						console.log(x + '-' + y);
+						room.the_player.go_to.start({
+							target: x + '-' + y,
+							action: function() {
+								setTimeout(function() {
+									$('#sprite').css('-310px 0');
+								}, 100);
+								sound_teleport.play();
+								game.void_bathroom(0,7);
+							}
+						});
+					})
+					.tooltip('right');
+
 			}, 10000);
 
 		//execute - END  
@@ -2359,16 +2474,24 @@ var game = {
 	//void - END
 	},
 
-	void_big_room: function(x,y) {
+	void_bathroom: function(x,y) {
 
 		//generates start room
 		room.generate({
 		
-			inject:'void_big_room',
+			inject:'void_bathroom',
 			
 			grid_width: 8,
-			grid_height: 19,
-			collision_nodes: [],
+			grid_height: 9,
+
+			collision_nodes: [
+				'0-0', '0-1', '0-2', '0-3', '0-4', '0-5', 
+				'1-0', '1-1', '1-2', '1-3', '1-4', '1-5', 
+				'2-1', '2-2', '2-3',
+				'5-4', '5-5', '5-6', '5-7', '5-8', 
+				'6-4', '6-5', '6-6', '6-7', '6-8', 
+				'7-4', '7-5', '7-6', '7-7', '7-8'
+			],
 			
 			drag_room:true,
 			
@@ -2380,57 +2503,12 @@ var game = {
 			volume:0,
 			
 			execute: function() {
-				scene.no_click(true, 'rgba(0, 0, 0, .3)');
-				$('#settings, #button, #switch_sound').addClass('dim');
 
-				var	$player = $('#player'),
-					$sprite = $('#sprite'),
-					$thisRoom = $('#big_room'),
-					$fauxPlayer = $('#player_faux'),
-					$overlay = $('#big_room_overlay');
-
-
-				setTimeout(function() {
-					$sprite.css('background-position', '-930px 0');
-					$thisRoom.css({
-						left: $(window).width()/2 - 462,
-						top: $(window).height()/2 - 250
-					});
-					sound_door.play();
-					$fauxPlayer.text_cloud('!!!', 1500);
-					setTimeout(function() {
-						$overlay
-							.fadeIn(200, function() {
-								$overlay.fadeOut(1000);
-							});
-
-						sound_screech2.play();
-						$fauxPlayer
-							.css('background-image', 'url(images/void_merge.png)')
-							.sprite({
-								fps: 12,
-								no_of_frames: 12,
-								play_frames: 12
-							})
-							.delay(1000)
-							.fadeOut(500);
-					}, 1500);
-					setTimeout(function() {
-						$player.text_cloud('?', 1500);
-						room.the_player.go_to.start({
-							target: '6-6',
-							action: function() {
-								$player.text_cloud('What the..?!!', 2000);
-							}  
-						});
-					}, 1000);
-				}, 100);
-
-				if ($.inArray("scene_computer", played) !== -1 ) {
-					$computer.addClass('off');
-					$('#computer_use')
-						.attr('data-tooltip', 'It doesn\'t work anymore...')
-						.css('cursor', 'help');
+				if ( $.inArray("scene_void_shower", played) === -1 ) {
+					scene.bathroom_void_shower();
+				} else {
+					$('#faux_player').remove();
+					game.bathroom_setup();
 				}
 
 			//execute - END  
@@ -2438,7 +2516,67 @@ var game = {
 		
 		});
 
-	//big room - END
+	//void bathroom - END
+	},
+
+	exit: function(x,y) {
+
+		//generates start room
+		room.generate({
+		
+			inject:'exit',
+			
+			grid_width: 6,
+			grid_height: 6,
+
+			collision_nodes: ['0-0', '0-1', '0-5', '1-0', '5-0'],
+			
+			drag_room:true,
+			
+			player: 'player',
+			player_speed: 100,
+			player_position_x: x,
+			player_position_y: y,
+			
+			volume:0,
+
+			fade_color: 'white',
+			
+			execute: function() {
+
+				scene.no_click(false);
+
+				setTimeout(function() {
+					$('#sprite').css('background-position', '-620px 0');
+				}, 100);
+
+				$('body')
+					.prepend('<div id="exit_sky" />')
+					.css('background', '#fff');
+
+				var $exit = $('#use_exit'),
+					$back = $('#use_back');
+
+				$exit
+					.on('click', function() {
+						room.the_player.go_to.start({
+							target: '0-3',
+							action: function() {	
+								game.train(14,3);
+							}
+						});
+					})
+					.tooltip('right');
+				$back
+
+					.tooltip('left');
+
+			//execute - END  
+			}
+		
+		});
+
+	//exit - END
 	}
 
 //game - END  
@@ -2582,16 +2720,23 @@ soundManager.onready(function() {
 				game.train(2,2);
 
 			} else if (is_in === 'last_corridor') {
-			
-				game.last_corridor(0,6);
+				if($.inArray("darkness_retract3", played) !== -1) {
+					game.last_corridor(2,36);
+				} else {
+					game.last_corridor(0,6);
+				}
 
 			} else if (is_in === 'void') {
 			
 				game.void(11,11);
 
-			} else if (is_in === 'void_big_room') {
+			} else if (is_in === 'void_bathroom') {
 			
-				game.void_big_room(7,9);
+				game.void_bathroom(0,7);
+
+			} else if (is_in === 'exit') {
+			
+				game.exit(2,2);
 
 			}
 

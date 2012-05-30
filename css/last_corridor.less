@@ -6,9 +6,16 @@ height: 1352px;
 cursor:move;
 background: url(../images/last_corridor.jpg);
 
-	#player .text_cloud {
-		left: 140px;
-		bottom: 305px;
+	#player { 
+		.text_cloud {
+			left: 10px;
+			bottom: 280px;
+			min-width: 175px;
+		}
+
+		#flash {
+			z-index: 9999;
+		}
 	}
 
 	#sprite {
@@ -284,6 +291,13 @@ background: url(../images/last_corridor.jpg);
 		z-index: 1003;
 		opacity: 0;
 		background: url(../images/last_corridor_player_dark.png);
+
+		.text_cloud {
+			width: 175px;
+			left: -60px;
+			bottom: 316px;
+			.scaleX(-1);
+		}
 	}
 
 	#darkness {
@@ -361,6 +375,16 @@ background: url(../images/last_corridor.jpg);
 
 	}
 
+}
+
+#lightbox_led {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 2000;
+	background: rgba(0, 0, 0, .5);
 }
 
 #led_panel {
@@ -448,3 +472,52 @@ background: url(../images/last_corridor.jpg);
 	background-image: url(../images/last_corridor_led_reset.png); 
 }
 
+#darkness_fill {
+	width: 9999px;
+	height: 9999px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: #000;
+}
+
+#darkness_bg,
+#darkness_bg_light {
+	width: 558px;
+	height: 558px;
+	top: 425px;
+	left: -20px;
+	z-index: 1;
+	position: absolute;
+	background: url(../images/darkness_bg.jpg);
+}
+
+#darkness_bg_light {
+	background: url(../images/darkness_bg_light.jpg);
+}
+
+#darkness_floor,
+#darkness_floor_light {
+	width: 343px;
+	height: 197px;
+	top: 779px;
+	left: 84px;
+	z-index: 2;
+	position: absolute;
+	background: url(../images/darkness_floor.png);
+}
+
+#darkness_floor_light {
+	background: url(../images/darkness_floor_light.png);
+}
+
+#darkness_wires {
+	width: 406px;
+	height: 396px;
+	position: absolute;
+	top: 429px;
+	left: 34px;
+	z-index: 200;
+	background: url(../images/darkness_wires.png);
+	.origin(179, 370);
+}

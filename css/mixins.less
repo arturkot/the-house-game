@@ -133,6 +133,22 @@
 	transform: scale(@scale)
 }
 
+.scaleX(@scale) {
+	-moz-transform: scaleX(@scale);
+	-webkit-transform: scaleX(@scale);
+	-o-transform: scaleX(@scale);
+	-ms-transform: scaleX(@scale);
+	transform: scaleX(@scale)
+}
+
+.scaleY(@scale) {
+	-moz-transform: scaleY(@scale);
+	-webkit-transform: scaleY(@scale);
+	-o-transform: scaleY(@scale);
+	-ms-transform: scaleY(@scale);
+	transform: scaleY(@scale)
+}
+
 .transition (@property, @time: 0.5s, @easing: linear) {
 	-moz-transition: @property @time @easing;
 	-webkit-transition: @property @time @easing;

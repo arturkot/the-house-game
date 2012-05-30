@@ -97,6 +97,25 @@ cursor:move;
 		background: url(../images/train_interior.png);
 	}
 
+	#faux_player {
+		width: 310px;
+		height: 310px;
+		position: absolute;
+		left: 50px;
+		top: -249px;
+		background: url(../images/hidden_corridor_player.png) no-repeat 0 0;
+		display: none;
+
+		.shadow {
+			width: 122px;
+			height: 102px;
+			background: url(../images/hidden_corridor_shadow.png) no-repeat;
+			left: 100px;
+			top: 212px;
+			opacity:.5;
+		}
+	}
+
 	#train_door {
 		width: 109px;
 		height: 322px;
@@ -155,7 +174,20 @@ cursor:move;
 			-ms-animation-iteration-count: infinite;
 			-o-animation-iteration-count: infinite;
 			animation-iteration-count: infinite;
-		}		
+		}
+
+		&.rotate_faster {
+			-webkit-animation: spin 2s linear;
+			-moz-animation: spin 2s linear;
+			-ms-animation: spin 2s linear;
+			-o-animation: spin 2s linear;
+			animation: spin 2s linear;
+			-webkit-animation-iteration-count: infinite;
+			-moz-animation-iteration-count: infinite;
+			-ms-animation-iteration-count: infinite;
+			-o-animation-iteration-count: infinite;
+			animation-iteration-count: infinite;
+		}	
 	}
 
 	#ring_3 {
@@ -181,6 +213,21 @@ cursor:move;
 		.invisible_door(313px, 318px);
 	}
 
+	#use_train_door {
+		.isometric_left;
+		.door(149px, -262px, 120px, 263px);
+		z-index: 2000;
+	}
 
+}
+
+#ekg {
+	width: 0;
+	height: 10px;
+	margin-top: -5px;
+	position: fixed;
+	left: 0;
+	top: 50%;
+	background: #fff;
 }
 
