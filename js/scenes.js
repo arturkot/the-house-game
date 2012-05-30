@@ -435,6 +435,7 @@ var scene = {
 					$('#settings, #button, #switch_sound').removeClass('dim');
 					var get_played = $.jStorage.get('played');
 					get_played.push('scene_void_shower');
+					get_played.push('scene_shower');
 					$.jStorage.set('played', get_played);
 				}, 1000);
 

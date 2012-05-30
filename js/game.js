@@ -1411,11 +1411,11 @@ var game = {
 			});
 		});
 
-		if ( $.inArray("scene_shower", played) !== -1 && $.inArray("scene_void_shower", played) !== -1 ) {
+		if ( $.inArray("scene_shower", played) !== -1) {
 			$('#curtain').css('opacity', 0);
 			$('#curtain_folded').css('opacity', 1);
 			$('#curtain_use').css('cursor', 'move');
-		} else if (is_in === "bathroom") {
+		} else {
 			$('#curtain_use').click(function() {
 				room.the_player.go_to.start({
 					target: '0-7',
