@@ -159,40 +159,40 @@ var room = {
 					}
 				}, 100);
 
-				room.resumeScreen = function() {
-					$.idleTimer(45000);
-					$(document).on('idle.idleTimer', function(){
-						$.idleTimer('destroy');
-						$('#settings, #button, #switch_sound').addClass('dim');
-						scene.no_click(true, 'rgba(0, 0, 0, .8)');
-						var $noclick = $('#no_click');
-						$noclick.addClass('the-resume-screen');
-						var resumeScreen = '<div id="resume_screen"><p><span id="resume_screen_resume" class="icon"></span><span class="text">Wznów</span></p><p><span id="resume_screen_restart" class="icon"></span><span class="text">Od nowa</span></p></div>';
-						$noclick
-							.css('z-index', 9999)
-							.append(resumeScreen);
+				// room.resumeScreen = function() {
+				// 	$.idleTimer(45000);
+				// 	$(document).on('idle.idleTimer', function(){
+				// 		$.idleTimer('destroy');
+				// 		$('#settings, #button, #switch_sound').addClass('dim');
+				// 		scene.no_click(true, 'rgba(0, 0, 0, .8)');
+				// 		var $noclick = $('#no_click');
+				// 		$noclick.addClass('the-resume-screen');
+				// 		var resumeScreen = '<div id="resume_screen"><p><span id="resume_screen_resume" class="icon"></span><span class="text">Wznów</span></p><p><span id="resume_screen_restart" class="icon"></span><span class="text">Od nowa</span></p></div>';
+				// 		$noclick
+				// 			.css('z-index', 9999)
+				// 			.append(resumeScreen);
 
-						$('#resume_screen_resume')
-							.closest('p')
-							.on('click', function() {
-								$noclick.fadeOut(500, function() {
-									room.resumeScreen();
-									$('#settings, #button, #switch_sound').removeClass('dim');
-									$(this).remove();
-								});
-							});
+				// 		$('#resume_screen_resume')
+				// 			.closest('p')
+				// 			.on('click', function() {
+				// 				$noclick.fadeOut(500, function() {
+				// 					room.resumeScreen();
+				// 					$('#settings, #button, #switch_sound').removeClass('dim');
+				// 					$(this).remove();
+				// 				});
+				// 			});
 
-						$('#resume_screen_restart')
-							.closest('p')
-							.on('click', function() {
-								$.jStorage.flush();
-								window.location.reload();
-							});
+				// 		$('#resume_screen_restart')
+				// 			.closest('p')
+				// 			.on('click', function() {
+				// 				$.jStorage.flush();
+				// 				window.location.reload();
+				// 			});
 
-					});
-				};
+				// 	});
+				// };
 
-				room.resumeScreen();
+				// room.resumeScreen();
 
 				//intiate spritely 
 				$(  room.player_body()  )

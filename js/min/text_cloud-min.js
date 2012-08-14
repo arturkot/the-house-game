@@ -1,1 +1,1 @@
-(function(a){a.fn.text_cloud=function(b,c){var d=a('<div class="text_cloud" />').appendTo(this).append("<div/>").append("<span/>");d.find("span").text(b);setTimeout(function(){d.fadeOut(200,function(){d.remove()})},c)}})(jQuery);
+(function(e){e.fn.text_cloud=function(t,n){var r=e('<div class="text_cloud" />').appendTo(this).append("<div/>").append("<span/>");r.find("span").text(t);setTimeout(function(){r.fadeOut(200,function(){r.remove()})},n)}})(jQuery);
