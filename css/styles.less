@@ -434,6 +434,58 @@ html, body,
 /* settings - END */
 }
 
+#author {
+	color: #fff;
+	text-transform: lowercase;
+	font: 20px/40px 'Neuton', georgia, serif;
+	height: 40px;
+	padding: 10px;
+	border-radius: 4px;
+	position: fixed;
+	left: 20px;
+	bottom: 20px;
+	z-index: 9999;
+	overflow: hidden;
+	background: rgba(0, 0, 0, .5);
+
+	&:hover p {
+		display: block;
+	}
+
+	.btn {
+		text-align: center;
+		width: 40px;
+		height: 40px;
+		border-radius: 40px;
+		float: left;
+		cursor: help;
+		background: #045E78;
+
+		&:hover { background: #00D0F5; }
+	}
+
+	p {
+		line-height: 20px;
+		padding-left: 20px;
+		border-left: 1px solid #fefefe;
+		margin: 10px 0 0 20px;
+		float: left;
+		display: none;
+
+		&:first-of-type {
+			border: 0 none;
+			margin-left: 0;
+		}
+	}
+
+	a {
+		color: #FF3927;
+		text-decoration: none;
+
+		&:hover { text-decoration: underline; }
+	}
+}
+
 #player {
 	width:40px;
 	height:40px;
