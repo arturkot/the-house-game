@@ -21,6 +21,7 @@ var settings = {
 		});
 	
 		settings.reset();
+		settings.fullScreen();
 		
 	},
 
@@ -49,6 +50,32 @@ var settings = {
 		  });
 		
 		});
+
+	},
+
+	fullScreen: function() {
+
+		var docElm = document.documentElement;
+		if (docElm.requestFullscreen || docElm.mozRequestFullScreen || docElm.webkitRequestFullScreen) {
+
+			$('<li id="settings_full-screen">full screen</li>')
+				.prependTo($('#settings').find('ul'))
+				.click(function() {
+
+					var $that = $(this);
+					var isInFullScreen = (document.fullScreenElement && document.fullScreenElement !== null) || (document.mozFullScreen || document.webkitIsFullScreen);
+
+					
+					if (!isInFullScreen) {
+						$that.text('windowed mode');
+						if (docElm.requestFullscreen) { docElm.requestFullscreen(); }
+						else if (docElm.mozRequestFullScreen) { docElm.mozRequestFullScreen(); }
+						else if (docElm.webkitRequestFullScreen) { docElm.webkitRequestFullScreen(); }
+					}
+
+				});
+
+		}
 
 	}
 
