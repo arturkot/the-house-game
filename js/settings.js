@@ -67,7 +67,6 @@ var settings = {
 
 					
 					if (!isInFullScreen) {
-						$that.text('windowed mode');
 						if (docElm.requestFullscreen) { docElm.requestFullscreen(); }
 						else if (docElm.mozRequestFullScreen) { docElm.mozRequestFullScreen(); }
 						else if (docElm.webkitRequestFullScreen) { docElm.webkitRequestFullScreen(); }
