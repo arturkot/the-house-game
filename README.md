@@ -8,7 +8,6 @@ I've wanted to create a game since a long time. You know - one of those cool thi
 
 **You can play it [right here](http://the-house.arturkot.pl).** Please mind that:
 
-* this game is *almost* finished. Its about 95% complete, I'll, eventually, finish it,
 * it's very, very short,
 * it's my first game ever. :)
 
