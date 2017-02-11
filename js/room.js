@@ -360,7 +360,10 @@ var room = {
 			for (i=0; i<collisions.length; i++) {
 				var x = $('#' + collisions[i]).attr('data-x'),
 					y = $('#' + collisions[i]).attr('data-y');
-				grid[y][x] = 1;
+
+				if (x && y) {
+					grid[y][x] = 1;
+				}
 			}
 
 			return grid;
