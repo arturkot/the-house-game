@@ -1,6 +1,8 @@
 The House - simple adventure game
 =================================
 
+[![run on repl.it](http://repl.it/badge/github/arturkot/the-house-game)](https://repl.it/github/arturkot/the-house-game)
+
 Introduction
 ------------
 
