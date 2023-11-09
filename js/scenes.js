@@ -25,7 +25,7 @@ var scene = {
 							'class': 'message'
 						})
 						.appendTo('#intro')
-						.text('Hey!')
+						.text('嘿！')
 						.hide()
 						.fadeIn(1000, function() {
 							$(this).fadeOut(2000);
@@ -36,7 +36,7 @@ var scene = {
 									'class': 'message'
 								})
 								.appendTo('#intro')
-								.text('Hello!')
+								.text('你好！')
 								.hide()
 								.fadeIn(2000, function() {
 									$(this).fadeOut(2000); 
@@ -47,7 +47,7 @@ var scene = {
 										'class': 'message'
 									})
 									.appendTo('#intro')
-									.text('I hope he\'s alive...')
+									.text('我希望他还活着...')
 									.hide()
 									.fadeIn(5000)
 									.fadeOut(5000);
@@ -58,7 +58,7 @@ var scene = {
 										'class': 'message player'
 									})
 									.appendTo('#intro')
-									.text('What?!')
+									.text('什么？！')
 									.hide()
 									.fadeIn(500)
 									.fadeOut(5000, function() {  
@@ -69,7 +69,7 @@ var scene = {
 												'class': 'message player'
 											})
 											.appendTo('#intro')
-											.text('What\'s going on?!')
+											.text('发生了什么？！')
 											.hide()
 											.fadeIn(500)
 											.fadeOut(4000, function() {
@@ -142,7 +142,7 @@ var scene = {
 					'class': 'message'
 				})
 				.appendTo('#corridor')
-				.text('Come downstairs...')
+				.text('下楼...')
 				.hide()
 				.fadeIn(1000, function() {
 					$(this).fadeOut(2000);
@@ -153,7 +153,7 @@ var scene = {
 						'class': 'message'
 					})
 					.appendTo('#corridor')
-					.text('NOW!')
+					.text('马上！')
 					.hide()
 					.fadeIn(1000, function() {
 						 $(this).fadeOut(2000);
@@ -164,7 +164,7 @@ var scene = {
 								'class': 'message'
 							})
 							.appendTo('#corridor')
-							.text('Merge with me.')
+							.text('与我合体。')
 							.hide()
 							.fadeIn(1000)
 							.fadeOut(2000, function() {
@@ -241,7 +241,7 @@ var scene = {
 			target: '3-7'
 		});
 		setTimeout(function() {
-			$('#player').text_cloud('WHAT the...!?', 2000);
+			$('#player').text_cloud('这是什么奇怪的东西。。。？！', 2000);
 			$('#sprite').css('background-position', '-310px 0');
 		}, 400);
 		$('#curtain').css('opacity', 0);
@@ -386,7 +386,7 @@ var scene = {
 
 			var $overlay = $('<div id="bathroom_overlay" />').appendTo('#bathroom').css('z-index', 1000);
 
-			$fauxPlayer.text_cloud('!!!', 1000);
+			$fauxPlayer.text_cloud('这就是秋月同志？!!!', 2000);
 
 			setTimeout(function() {
 				sound_screech2.play();
@@ -414,7 +414,7 @@ var scene = {
 					room.the_player.go_to.start({
 						target: '3-7',
 						action: function() {
-							$player.text_cloud('WHAT the...!?', 2000);
+							$player.text_cloud('秋月就这么死了吗？...', 2000);
 							$sprite.css('background-position', '-310px 0');
 						}
 					});
@@ -446,7 +446,7 @@ var scene = {
 		if ($.inArray("scene_computer", played) !== -1 ) {
 			$computer.addClass('off');
 			$('#computer_use')
-				.attr('data-tooltip', 'It doesn\'t work anymore...')
+				.attr('data-tooltip', '它不能正常运行了...')
 				.css('cursor', 'help');
 		}
 	// bathroom_void_shower - END
@@ -499,9 +499,9 @@ var scene = {
 				})
 			}
 			blink();
-			diamond.text_cloud('It\'s coming!', 1500);
+			diamond.text_cloud('它来了！', 1500);
 			setTimeout(function() {
-				fly.text_cloud('Show me the way to him.', 3000);
+				fly.text_cloud('给它指出路！', 3000);
 			}, 4000);
 
 		};
@@ -535,7 +535,7 @@ var scene = {
 						var get_played = $.jStorage.get('played');
 						get_played.push('scene_unite');
 						$.jStorage.set('played', get_played);
-						player.text_cloud('I feel... Kind of... Better now.', '2000');
+						player.text_cloud('我现在感觉...好一些了。', '2000');
 					});
 					$('div.tile, #exit').css('display', 'block');
 				});
@@ -633,11 +633,11 @@ var scene = {
 				};
 				repeat(fish);
 				setTimeout(function() {
-					fish.text_cloud('It\'s so nice outside!', 2000);
+					fish.text_cloud('外面好美...', 2000);
 				}, 1000);
 				setTimeout(function() {
 					fish.stop(true).animate({left: 550, top: 320}, 1000, function() {
-						fish.spState(1).text_cloud('Thank you man!', 2000);
+						fish.spState(1).text_cloud('谢谢你，伙计。', 2000);
 						corridor.fadeIn(1000);
 						$('#tree').fadeOut(1000);
 						$('body').animate({backgroundColor: '#000000'}, 1000);
@@ -663,10 +663,10 @@ var scene = {
 									get_played.push('scene_outside');
 									$.jStorage.set('played', get_played);	
 									setTimeout(function() {
-										$('#player').text_cloud('What was that?!', 2000);
+										$('#player').text_cloud('那是什么东西？！', 2000);
 									}, 3000);
 									setTimeout(function() {
-										$('#player').text_cloud('Was it real?', 2000);
+										$('#player').text_cloud('这都是真的吗？', 2000);
 									}, 8000);
 									game.hidden_corridor(2, 6);
 								});
@@ -757,7 +757,7 @@ var scene = {
 							no_of_frames: 12,
 							play_frames: 4
 						})
-						.text_cloud('Huh?', 500);
+						.text_cloud('啊？？', 500);
 				}, 2000);
 
 				setTimeout(function() {
@@ -785,9 +785,9 @@ var scene = {
 										left: -67,
 										top: -40
 									}, 500, function() {
-										$ticket.text_cloud('Your stop is next.', 2000);
+										$ticket.text_cloud('你要到站了。', 2000);
 										setTimeout(function() {
-											$ticket.text_cloud('You have to leave the train.', 2000);
+											$ticket.text_cloud('你可以下车了。', 2000);
 										}, 2000);
 										//$player.text_cloud('Huh..?', 1000);
 										setTimeout(function() {
@@ -811,7 +811,7 @@ var scene = {
 													}, 1000);
 
 												setTimeout(function() {
-													$player.text_cloud('OK...', 99999);
+													$player.text_cloud('好...', 99999);
 													$ticket.animate({opacity: 0}, 200);
 													$('#cabin').animate({opacity: 0}, 3000, function() {
 														game.train(2,2);
@@ -849,7 +849,7 @@ var scene = {
 				}, 5000, function() {
 					sound_darkness.play();
 					$text
-						.text('Fssssssss')
+						.text('呜哇啊啊啊啊啊啊')
 						.animate({opacity: 1}, 500);
 					setTimeout(function() {
 						$text.animate({opacity: 0}, 1000);
@@ -902,7 +902,7 @@ var scene = {
 					}, 5000, function() {
 						sound_darkness.play();
 						$text
-							.text('Leave me alone!')
+							.text('离我远点！')
 							.animate({opacity: 1}, 500);
 						setTimeout(function() {
 							$text.animate({opacity: 0}, 1000);
@@ -965,16 +965,16 @@ var scene = {
 								$darkness_bg.transition({x: -10}, 10000, 'linear');
 								$darkness_wires.transition({rotate: '10deg'}, 10000, 'linear');
 
-								$player.text_cloud('I guess I have no choice. I need to accept you.', 4000);
-								$dark.text_cloud('I guess I have no choice. I need to accept you.', 4000);
+								$player.text_cloud('我想你没有选择。 我需要接受你。', 4000);
+								$dark.text_cloud('我想你没有选择。 我需要接受你。', 4000);
 
 								setTimeout(function() {
-									$player.text_cloud('But this time...', 3000);
-									$dark.text_cloud('But this time...', 3000);
+									$player.text_cloud('但这次...', 3000);
+									$dark.text_cloud('但这次...', 3000);
 								}, 4000);
 
 								setTimeout(function() {
-									$player.text_cloud('I\'ll absorb you.', 3000);
+									$player.text_cloud('我会吸收你。', 3000);
 								}, 8000);
 
 								$darkEls

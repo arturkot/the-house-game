@@ -44,16 +44,16 @@
 			//rooms backgrounds
 			sound.room = soundManager.createSound({id: 'room', url: dir + 'sound/room' + sound_ext, autoLoad: true});
 			sound.corridor = soundManager.createSound({id: 'corridor', url: dir + 'sound/corridor' + sound_ext, autoLoad: true}); 
-			sound.hidden_corridor = soundManager.createSound({id: 'last_corridor', url: dir + 'sound/corridor' + sound_ext, autoLoad: true}); 
+			sound.hidden_corridor = soundManager.createSound({id: 'last_corridor', url: dir + 'sound/corridor_out' + sound_ext, autoLoad: true}); 
 			sound.last_corridor = soundManager.createSound({id: 'last_corridor', url: dir + 'sound/corridor' + sound_ext, autoLoad: true}); 
 			sound.aquarium = soundManager.createSound({id: 'aquarium', url: dir + 'sound/aquarium' + sound_ext, autoLoad: true}); 
 			sound.picture = soundManager.createSound({id: 'picture', url: dir + 'sound/picture_snow' + sound_ext, autoLoad: true});
 			sound.picture_snow = soundManager.createSound({id: 'picture_snow', url: dir + 'sound/picture_snow' + sound_ext, autoLoad: true});
 			sound.kitchen = soundManager.createSound({id: 'kitchen', url: dir + 'sound/room' + sound_ext, autoLoad: true}); 
 			sound.kitchen_true = soundManager.createSound({id: 'kitchen_true', url: dir + 'sound/room' + sound_ext, autoLoad: true}); 
-			sound.toilet = soundManager.createSound({id: 'toilet', url: dir + 'sound/corridor' + sound_ext, autoLoad: true});
-			sound.bathroom = soundManager.createSound({id: 'bathroom', url: dir + 'sound/room' + sound_ext, autoLoad: true});
-			sound.void_bathroom = soundManager.createSound({id: 'void_bathroom', url: dir + 'sound/room' + sound_ext, autoLoad: true});
+			sound.toilet = soundManager.createSound({id: 'toilet', url: dir + 'sound/toilet' + sound_ext, autoLoad: true});
+			sound.bathroom = soundManager.createSound({id: 'bathroom', url: dir + 'sound/toilet' + sound_ext, autoLoad: true});
+			sound.void_bathroom = soundManager.createSound({id: 'void_bathroom', url: dir + 'sound/toilet' + sound_ext, autoLoad: true});
 			sound.big_room = soundManager.createSound({id: 'big_room', url: dir + 'sound/room' + sound_ext, autoLoad: true});
 			sound.boiler_room = soundManager.createSound({id: 'boiler_room', url: dir + 'sound/boiler_room' + sound_ext, autoLoad: true});
 			sound.fridge = soundManager.createSound({id: 'fridge', url: dir + 'sound/picture_snow' + sound_ext, autoLoad: true});

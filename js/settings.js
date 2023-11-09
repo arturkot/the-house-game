@@ -32,8 +32,8 @@ var settings = {
 		  dialogue_box.display({
 			character:false,
 			picture:false,
-			text: 'The game will start from the beggining. Save data will be erased.',
-			options: ['Ok', 'Cancel']
+			text: '游戏将回到最开始，一切记录点都会被擦除。',
+			options: ['好的', '取消']
 		  });
 
 		  $('#options').delegate('#option_0', 'click', function() {
@@ -58,7 +58,7 @@ var settings = {
 		var docElm = document.documentElement;
 		if (docElm.requestFullscreen || docElm.mozRequestFullScreen || docElm.webkitRequestFullScreen) {
 
-			$('<li id="settings_full-screen">full screen</li>')
+			$('<li id="settings_full-screen">全  屏</li>')
 				.prependTo($('#settings').find('ul'))
 				.click(function() {
 

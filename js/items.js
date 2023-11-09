@@ -53,10 +53,29 @@ var items = {
 	use: function(item) {
 	
 		var get_item = $(item);
+		var item_name_chinese;
 		
 		if ( get_item.length > 0 ) {
 	
-			var item_name = $(item).attr('id'); 
+			var item_name = $(item).attr('id');
+
+			//add chinese items show.
+			if (item_name == 'twig')
+			{
+				item_name_chinese = '干树枝';
+			}
+			if (item_name == 'coal')
+			{
+				item_name_chinese = '煤块';
+			}
+			if (item_name == 'note')
+			{
+				item_name_chinese = '笔记';
+			}
+			if (item_name == 'key')
+			{
+				item_name_chinese = '钥匙';
+			}
 			
 			//removes item
 			$(item).remove(); 
@@ -71,8 +90,8 @@ var items = {
 			dialogue_box.display({
 				character:false,
 				picture:false,
-				text: 'The item "' + item_name + '" has been used!',
-				options: ['Ok']
+				text: '物品 "' + item_name_chinese + '" 已经使用了！',
+				options: ['好的']
 			});
 
 			if ($('#items').children().length < 2) {
