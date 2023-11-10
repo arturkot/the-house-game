@@ -114,31 +114,32 @@ var npc = {
 						//dialogue LEVEL 1
 						
 						dialogue_box.display({
-							character:'Fish',
+							character:'怪鱼',
 							picture:'aquarium_fish_big.png',
-							text: 'Hello!',
-							options: ['Hi.', 'I don\'t have time to talk with you.']
+							text: '你好!',
+							//options: ['Hi.', 'I don\'t have time to talk with you.']
+							options: ['你好，', '我现在没有时间跟你讲话。']
 						}); 
 					
 						$('#options').on('click', '#option_1', function() {
 							dialogue_box.destroy();
 							npc.fish.move(true);
-							$('#fish').text_cloud('Oh really? I have A LOT.', 8000);
+							$('#fish').text_cloud('噢，真的吗？ 我可有很多话跟你讲。', 8000);
 						});
 						
 						//dialogue LEVEL 2
 						$('#options').on('click', '#option_0', function() {
 							dialogue_box.display({
-								character:'Fish',
+								character:'怪鱼',
 								picture:'aquarium_fish_big.png',
-								text: 'Tell me... Did you look through the window?',
-								options: ['Yes I did.', 'No.']
+								text: '告诉我...你看过窗外了没有？',
+								options: ['是的，我看过了', '还没有。']
 							}); 
 
 							$('#options').on('click', '#option_1', function() {
 								dialogue_box.destroy();
 									npc.fish.move(true);
-								$('#fish').text_cloud('So please take a look and tell me what did you see.', 10000); 
+								$('#fish').text_cloud('那就去看看，然后告诉我你看到什么。', 10000); 
 								$('#teleport, #exit').show('slow');
 							});
 							
@@ -148,16 +149,16 @@ var npc = {
 							
 								$('#options').on('click', '#option_0', function() {
 									dialogue_box.display({
-										character:'Fish',
+										character:'怪鱼',
 										picture:'aquarium_fish_big.png',
-										text: 'So what did you see then?',
+										text: '你看到了什么？',
 										options: ['...']
 									});
 									
 									$('#options').on('click', '#option_0', function() {
 										dialogue_box.destroy();
 										npc.fish.move(true);
-										$('#fish').text_cloud('Yeah. C\'mon! Check that window.', 8000); 
+										$('#fish').text_cloud('好， 去吧，看看窗外。', 8000); 
 										$('#teleport, #exit').show('slow');
 									});
 									
@@ -167,16 +168,16 @@ var npc = {
 							
 								$('#options').on('click', '#option_0', function() {
 									dialogue_box.display({
-										character:'Fish',
+										character:'怪鱼',
 										picture:'aquarium_fish_big.png',
-										text: 'So what did you see than?',
-										options: ['Many flying... Objects?']
+										text: '你看到了什么？',
+										options: ['一些奇怪的...浮空的物体']
 									});
 									
 									$('#options').on('click', '#option_0', function() {
 										dialogue_box.destroy();
 										$('#fish_click_area').remove();
-										$('#fish').text_cloud('Wow. I have to check it out!', 3000); 
+										$('#fish').text_cloud('呜呼，我自由了...', 3000); 
 										$('#fish')
 										.stop(true,true)
 										.delay(2000)
@@ -261,8 +262,8 @@ var npc = {
 				dialogue_box.display({
 					character:false,
 					picture:false,
-					text: 'The furnace wants to eat a twig',
-					options: ['Ok', 'No!']
+					text: '火炉想吃一些树枝。',
+					options: ['好的', '不要！']
 				}, 'big');
 
 				$('#options').on('click', '#option_0', function() {
@@ -272,7 +273,7 @@ var npc = {
 							dialogue_box.destroy();
 							scene.no_click(true);
 							setTimeout(function() {
-								npc.furnace.furnace().text_cloud('Nom, nom, nom.', 750);
+								npc.furnace.furnace().text_cloud('不, 不, 不。', 750);
 								npc.furnace.is_eating();
 							}, 500);
 						});
@@ -282,8 +283,8 @@ var npc = {
 				dialogue_box.display({
 					character:false,
 					picture:false,
-					text: 'The furnace wants to eat your note. You may need it later – maybe you should write it down?',
-					options: ['Give a note.', 'Keep a note to yourself.']
+					text: '火炉想吃你的笔记。 你可能之后还会用到它，现在就记下来吗？',
+					options: ['给火炉笔记。', '把笔记先保留下来。']
 				}, 'big');
 
 				$('#options').on('click', '#option_0', function() {
@@ -293,7 +294,7 @@ var npc = {
 							dialogue_box.destroy();
 							scene.no_click(true);
 							setTimeout(function() {
-								npc.furnace.furnace().text_cloud('Nom, nom, nom.', 750);
+								npc.furnace.furnace().text_cloud('不, 不, 不。', 750);
 								npc.furnace.is_eating();
 							}, 500);
 						});
@@ -303,8 +304,8 @@ var npc = {
 				dialogue_box.display({
 					character:false,
 					picture:false,
-					text: 'The furnace want\'s to eat your note.',
-					options: ['Ok', 'No!']
+					text: '火炉想吃你的笔记。',
+					options: ['好的', '不要！']
 				}, 'big');
 
 				$('#options').on('click', '#option_0', function() {
@@ -314,7 +315,7 @@ var npc = {
 							dialogue_box.destroy();
 							scene.no_click(true);
 							setTimeout(function() {
-								npc.furnace.furnace().text_cloud('Nom, nom, nom.', 750);
+								npc.furnace.furnace().text_cloud('不, 不, 不。', 750);
 								npc.furnace.is_eating();
 							}, 500);
 						});
@@ -324,8 +325,8 @@ var npc = {
 				dialogue_box.display({
 					character:false,
 					picture:false,
-					text: 'The furnace want\'s to eat a coal.',
-					options: ['Ok', 'No!']
+					text: '火炉想吃一些煤。',
+					options: ['好的', '不要！']
 				}, 'big');
 
 				$('#options').on('click', '#option_0', function() {
@@ -335,7 +336,7 @@ var npc = {
 							dialogue_box.destroy();
 							scene.no_click(true);
 							setTimeout(function() {
-								npc.furnace.furnace().text_cloud('Nom, nom, nom.', 750);
+								npc.furnace.furnace().text_cloud('不, 不, 不。', 750);
 								npc.furnace.is_eating();
 							}, 500);
 						});
@@ -365,7 +366,7 @@ var npc = {
 										sound_clong.play();
 									})
 								}
-								npc.furnace.furnace().text_cloud('I want more!', 1000);
+								npc.furnace.furnace().text_cloud('我还要更多！', 1000);
 								scene.no_click(false);
 							} else {
 								npc.furnace.is_strong();
@@ -414,7 +415,7 @@ var npc = {
 				mouth 	= npc.furnace.mouth(),
 				fire 	= npc.furnace.fire();
 			
-			furnace.text_cloud('YEAH!', 2000);
+			furnace.text_cloud('好了可以了!', 2000);
 			mouth.attr('style', '');
 
 			if (!Modernizr.csstransitions) {
@@ -451,9 +452,9 @@ var npc = {
 				scene.no_click(false);
 				sound_clong.play();
 				soundManager.resume('boiler_room');
-				furnace.text_cloud('Thank you man!', 2000);
+				furnace.text_cloud('谢谢你朋友！', 2000);
 				setTimeout(function() {
-					furnace.text_cloud('Check your room! Things have changed!', 2000);
+					furnace.text_cloud('检查你的房间，有东西变化了！', 2000);
 				}, 3000)
 				npc.furnace.burn();
 				npc.furnace.random_moves();
@@ -475,11 +476,11 @@ var npc = {
 			
 			scene.no_click(true);
 			if ($.inArray("twig", used) === -1) {
-				furnace.text_cloud('I\'m weak...', 2000);
+				furnace.text_cloud('我很虚弱...', 2000);
 			} else if ($.inArray("note", used) === -1) {
-				furnace.text_cloud('Help me please...', 2000);
+				furnace.text_cloud('请帮帮我...', 2000);
 			} else if ($.inArray("coal", used) === -1) {
-				furnace.text_cloud('Still hungry...', 2000);
+				furnace.text_cloud('还是很饥饿...', 2000);
 			}
 
 			fire

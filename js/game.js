@@ -54,7 +54,15 @@ var game = {
 				$.jStorage.set('played', get_played);
 
 				//player is confused
-				$('#player').text_cloud('Where am I?', 2000);
+				//$('#player').text_cloud('我在哪？', 2000);
+				//player is confused
+				//$('#player').text_cloud('我要逃离这里...', 2000);
+				setTimeout(function() {
+					$('#player').text_cloud('我在哪？！', 2000);
+				}, 1000);
+				setTimeout(function() {
+					$('#player').text_cloud('这我要逃离这里...', 2000);
+				}, 8000);
 			}
 
 			//item becomes transparent when certain tiles are hovered - ('target'), ('tile1, tile2, etc.')
@@ -153,7 +161,7 @@ var game = {
 							if ( $.inArray("key", collected) === -1) { 
 	
 								sound_door_locked.play();
-								$('#player').text_cloud('Locked!', 1000); 
+								$('#player').text_cloud('门是锁着的！', 1000); 
 							
 							} else if ( $.inArray("key", used) === -1) {
 							
@@ -199,7 +207,7 @@ var game = {
 							.css('background-position','-310px 0')
 							.animate({ opacity: 0 }, 2000);
 	
-							$('#player').text_cloud('This aquarium is... Strange', 1500);
+							$('#player').text_cloud('这鱼缸...好奇怪', 1500);
 	
 							setTimeout(function() {
 	
@@ -311,7 +319,7 @@ var game = {
 		player_position_x: x,
 		player_position_y: y,
 		
-		volume:10,
+		volume:50,
 		
 		execute: function() {
 			
@@ -339,9 +347,9 @@ var game = {
 			
 				setTimeout(function() {
 	
-					$('#player').text_cloud('Teleport!? ...', 2000);
+					$('#player').text_cloud('传送门？！ ...', 2000);
 					
-				} , 5000);
+				} , 1000);
 			
 			}
 			
@@ -640,7 +648,7 @@ var game = {
 				room.settings.collision_nodes = [];
 				$('#8-0, #8-1, #9-0, #9-1').removeClass('collision');
 				$('#hidden_door').css('height', '246px');
-				$('<div id="door_hidden_corridor" data-tooltip="Go to the corridor" />')
+				$('<div id="door_hidden_corridor" data-tooltip="去走廊" />')
 				.appendTo('#corridor')
 				.tooltip('left');
 			} else {
@@ -653,7 +661,7 @@ var game = {
 							//overwrite collision nodes
 							room.settings.collision_nodes = [];
 							$('#8-0, #8-1, #9-0, #9-1').removeClass('collision');
-							$('<div id="door_hidden_corridor" data-tooltip="Go to the corridor" />')
+							$('<div id="door_hidden_corridor" data-tooltip="去走廊" />')
 							.appendTo('#corridor')
 							.tooltip('left');
 
@@ -811,7 +819,7 @@ var game = {
 								lightbox.on('click', '.close', function() {
 									close();
 									if (window.turned_on !== 'on' && $.jStorage.get('is_in') === 'corridor') {
-										$('#player').text_cloud('Looks like it\'s turned off.', 2000);
+										$('#player').text_cloud('看起来它已经关掉了。', 2000);
 									}
 								});
 							// load - END	
@@ -834,13 +842,13 @@ var game = {
 							$('#sprite').css('background-position', '-620px 0');
 							scene.no_click(true, 'rgba(0, 0, 0, .3)');
 							$('#settings, #button, #switch_sound').addClass('dim');
-							$('#player').text_cloud('I... I don\'t think it\'s a good idea to go there.', 2000);
+							$('#player').text_cloud('我...我想去那里不是一个好主意。', 2000);
 							setTimeout(function() {
 								dialogue_box.display({
 									character:false,
 									picture:false,
-									text: 'Would you like to step into the darkness?',
-									options: ['Ok', 'No!']
+									text: '你想去黑暗中探寻一下吗？',
+									options: ['好的！', '不要！']
 								}, 'small');
 						
 								$('#options').on('click', '#option_1', function() {
@@ -859,7 +867,7 @@ var game = {
 							}, 2000);
 						} else {
 							$('#sprite').css('background-position', '-620px 0');
-							$('#player').text_cloud('There\'s NO WAY I\'m going there!', 2000);
+							$('#player').text_cloud('这里已经没有路了！', 2000);
 						}
 					}
 				});
@@ -970,7 +978,7 @@ var game = {
 							indicator.text((time_limit - counter));
 						}, 1000);
 						window.timer_switch = setTimeout(function() {
-							switch_use.attr('data-tooltip', 'Use the switch');
+							switch_use.attr('data-tooltip', '使用开关');
 							window.turned_on = 'off';
 							sound_switch.play();
 							$('#switch').css('background-position', '0 0');
@@ -1101,13 +1109,13 @@ var game = {
 
 				setTimeout(function() {
 					if ( $.inArray("scene_unite", played) === -1 ||  $.inArray("scene_outside", played) === -1 ) {
-						creature.text_cloud('You\'re not ready yet', 2000);
+						creature.text_cloud('你还没有准备好。', 2000);
 						setTimeout(function() {
-							creature.text_cloud('You have to be at least partially complete to travel...', 2000);
+							creature.text_cloud('你必须完成剩下的一部分任务才能参加旅行...', 2000);
 						}, 3500);
 					} else {
 						scene.no_click(true, 'rgba(0,0,0,.1)');
-						creature.text_cloud('You\'re ready. You can go now...', 5000);
+						creature.text_cloud('你已经准备好了，你可以离开了...', 5000);
 						
 						setTimeout(function() {
 
@@ -1117,9 +1125,9 @@ var game = {
 								
 								action: function() {
 									$('#sprite').css('background-position', '-620px 0');
-									$('#player').text_cloud('But... Where?', 2000);
+									$('#player').text_cloud('但是...是哪里呢？', 2000);
 									setTimeout(function() {
-										creature.text_cloud('To meet with yourself.', 4000);
+										creature.text_cloud('去看看你曾经的自己。', 4000);
 
 										sound_woosh.play({volume: 120});
 										$('#light').animate({'opacity': 1}, 500, function() {
@@ -1525,7 +1533,7 @@ var game = {
 			player_position_x: x,
 			player_position_y: y,
 			
-			volume:0,
+			volume:50,
 			
 			execute: function() {
 
@@ -1567,7 +1575,7 @@ var game = {
 			if ($.inArray("scene_computer", played) !== -1 ) {
 				$computer.addClass('off');
 				$('#computer_use')
-					.attr('data-tooltip', 'It doesn\'t work anymore...')
+					.attr('data-tooltip', '它不能正常运行了...')
 					.css('cursor', 'help');
 			}
 
@@ -1639,7 +1647,7 @@ var game = {
 								
 								$computer.addClass('off');
 								$('#computer_use')
-									.attr('data-tooltip', 'It doesn\'t work anymore...')
+									.attr('data-tooltip', '它不能正常运行了...')
 									.css('cursor', 'help');
 
 								$('#status').text(']awe[∑ĽfWńĶ•');
@@ -1655,7 +1663,7 @@ var game = {
 								computer_screen.find('div.eye').animate({
 									height:5
 								}, function() {
-									computer_screen.text_cloud('I\'m waiting...', 2000);
+									computer_screen.text_cloud('我在等待...', 2000);
 									setTimeout(function() {
 										clearInterval(window.computer_distortions);
 										computer_screen.empty().css('background', '#000');
@@ -1985,7 +1993,7 @@ var game = {
 
 			if($.inArray("cabin_scene", played) === -1) {
 				setTimeout(function() {
-					$ticket.text_cloud('Good luck!', 1000);
+					$ticket.text_cloud('祝你好运！', 1000);
 				}, 1000);
 				setTimeout(function() {
 					sound_sliding_door.play();
@@ -2203,7 +2211,7 @@ var game = {
 			var activated1 = function() {
 				$led1
 					.off()
-					.attr('data-tooltip', 'It works now!')
+					.attr('data-tooltip', '它现在工作了！')
 					.css('cursor', 'help')
 					.tooltip('right');
 				$('#led_1')
@@ -2212,7 +2220,7 @@ var game = {
 				$darkness.addClass('retract_1');
 			};
 
-			if ( $.inArray("darkness_retract1", played) !== -1 ) {
+			if ( $.inArray("darkness_retract1", played) == -1 ) {
 				activated1();
 			} else {
 				$led1.on('click', function() {
@@ -2272,7 +2280,7 @@ var game = {
 			var activated2 = function() {
 				$led2
 					.off()
-					.attr('data-tooltip', 'It works now!')
+					.attr('data-tooltip', '它现在工作了！')
 					.css('cursor', 'help')
 					.tooltip('right');
 				$('#led_2')
@@ -2281,7 +2289,7 @@ var game = {
 				$darkness.addClass('retract_2');
 			};
 
-			if ( $.inArray("darkness_retract2", played) !== -1 ) {
+			if ( $.inArray("darkness_retract2", played) == -1 ) {
 				activated2();
 			} else {
 				$led2.on('click', function() {
@@ -2332,7 +2340,7 @@ var game = {
 			var activated3 = function() {
 				$led3
 					.off()
-					.attr('data-tooltip', 'It works now!')
+					.attr('data-tooltip', '它现在工作了！')
 					.css('cursor', 'help')
 					.tooltip('right');
 				$('#led_3')
@@ -2357,7 +2365,7 @@ var game = {
 						action: function() {
 							$lightbox.fadeIn();
 
-							var	thePattern = [
+							/*var	thePattern = [
 									[1,2], [2,4],
 									[5,1], [4,5]
 								],
@@ -2372,6 +2380,39 @@ var game = {
 								lowerRight = [
 									[1,4], [2,2],
 									[4,1], [5,5]
+								]*/
+								/*var	thePattern = [
+									[1,1], [1,2], [1,3], [1,4], [1,5],
+									[2,1], [2,3], [2,5],
+									[3,1], [3,2], [3,3], [3,4], [3,5],
+									[4,2], [4,4]
+								],*/
+								//simple the puzzle
+								var	thePattern = [
+									[1,2], [1,4], 
+									[2,1], [2,2], [2,4], [2,5],
+									[4,1], [4,2], [4,4], [4,5],
+									[5,2], [5,4]
+								],
+								upperLeft = [
+									[1,1], [1,3], [1,5],
+									[2,3],
+									[3,1], [3,2], [3,3], [3,4], [3,5], 
+									[4,3],
+									[5,1], [5,3], [5,5]
+								],
+								upperRight = [
+									[1,2], [1,4], 
+									[2,1], [2,2], [2,4], [2,5],
+									[4,1], [4,2], [4,4], [4,5],
+									[5,2], [5,4]
+								],
+								lowerRight = [
+									[1,1], [1,3], [1,5],
+									[2,3],
+									[3,1], [3,2], [3,3], [3,4], [3,5], 
+									[4,3],
+									[5,1], [5,3], [5,5]
 								]
 
 							ledsPuzzle(thePattern, upperLeft, upperRight, lowerRight, function() {
@@ -2500,7 +2541,7 @@ var game = {
 			player_position_x: x,
 			player_position_y: y,
 			
-			volume:0,
+			volume:50,
 			
 			execute: function() {
 
@@ -2561,9 +2602,15 @@ var game = {
 					.on('click', function() {
 						room.the_player.go_to.start({
 							target: '0-3',
-							action: function() {	
+							action: function() {
+								sound_teleport.play();	
 								game.train(14,3);
 							}
+							//target: '7-8',
+							//action: function() {
+							//	sound_teleport.play();
+							//	game.room(3,7);  
+							//}
 						});
 					})
 					.tooltip('right');
